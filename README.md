@@ -23,7 +23,7 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1tnS6UncQPrJohfio7nP20w54b6JQcdTE?usp=sharing)
 
-На данный момент, для сети VGG-16 посредством простейшего метода Saliency Maps (Heatmaps), вроде как согласно работе Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps (2013; Cited 2398), сгенерирована соответствующая классическая картинка. Captum пока вообще не используется!
+На данный момент, для сети VGG-16 посредством простейшего метода Saliency Maps (Heatmaps) сгенерирована соответствующая классическая картинка. Captum пока вообще не используется!
 
 **Plan**:
 1. Изучить возможности и ограничения captum.
@@ -45,11 +45,17 @@
 
 ### Saliency Maps
 
+- Основная (?) статья [Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps](https://arxiv.org/pdf/1312.6034.pdf)
+    > 2014 ; Cited > 2407.
+
 > См. также раздел `Analysis of existing software products > Captum` выше.
 
 ### Activation Maximization
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Jwhw8paNR1DAgWO7jx5kPKh5SLK2JKA4?usp=sharing)
+
+- Основная (?) статья [Visualizing higher-layer features of a deep network](https://www.researchgate.net/profile/Aaron-Courville/publication/265022827_Visualizing_Higher-Layer_Features_of_a_Deep_Network/links/53ff82b00cf24c81027da530/Visualizing-Higher-Layer-Features-of-a-Deep-Network.pdf)
+    > 2009 ; Cited > 922.
 
 **Plan**:
 1. Устранить баг, который препятствует запуску на GPU.
@@ -65,7 +71,8 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/15xZFBi_FCWCgPeG0yFHhkSPjkw4hnkCB?usp=sharing)
 
-Основная статья: Axiomatic Attribution for Deep Networks (ICML-2017; Cited 1149).
+- Основная статья [Axiomatic Attribution for Deep Networks](http://proceedings.mlr.press/v70/sundararajan17a/sundararajan17a.pdf)
+    > 2017 ; Cited > 1149 ; ICML.
 
 **Plan**:
 1. Более детально разобраться в коде и сделать масштабный рефакторинг.
