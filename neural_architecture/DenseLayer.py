@@ -30,7 +30,6 @@ class DenseLayer(object):
         return w * 1.0
 
 
-
     def draw(self, lw=2, figsize=(10, 10)): 
         tan = 2.4
         step = self.radius * 0.5
@@ -54,6 +53,12 @@ class DenseLayer(object):
         data = figure2array(fig)
         plt.close(fig)
         return data
+
+
+class Dense(DenseLayer):
+    def __init__(self, num_units=128):
+        super(Dense, self).__init__()
+        self.num_units = num_units
 
 
 
