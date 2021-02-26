@@ -41,8 +41,11 @@ def summary(model, input_size, batch_size=-1, device=torch.device('cuda:0'), dty
 
     return params_info
 
+def torch_model_dict(model, input_size):
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    return summary_string(model, input_size, device = device, return_dict = True)
 
-def summary_string(model, input_size, batch_size=-1, device=torch.device('cuda:0'), dtypes=None):
+def summary_string(model, input_size, batch_size=-1, device=torch.device('cuda:0'), dtypes=None, return_dict = False):
     if dtypes == None:
         dtypes = [torch.FloatTensor]*len(input_size)
 
@@ -144,5 +147,7 @@ def summary_string(model, input_size, batch_size=-1, device=torch.device('cuda:0
     summary_str += "Params size (MB): %0.2f" % total_params_size + "\n"
     summary_str += "Estimated Total Size (MB): %0.2f" % total_size + "\n"
     summary_str += "----------------------------------------------------------------" + "\n"
-    # return summary
-    return summary_str, (total_params, trainable_params)
+    if return_dict:
+        return summary
+    else:
+        return summary_str, (total_params, trainable_params)
