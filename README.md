@@ -21,8 +21,6 @@
 
 ### Captum
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1tnS6UncQPrJohfio7nP20w54b6JQcdTE?usp=sharing)
-
 На данный момент, для сети VGG-16 посредством простейшего метода Saliency Maps (Heatmaps) сгенерирована соответствующая классическая картинка. Captum пока вообще не используется!
 
 **Plan**:
@@ -32,9 +30,10 @@
 1. Реализовать что-то еще с помощью captum.
 1. Изучить captum_insights, обдумать, нужна ли она нам, если нужна, то научиться включать ее в colab.
 
-- [ ] TODO [**Е**] Выявляем недостатки и достоинства captum.
-- [ ] TODO [**Е**] Реализуем с captum Saliency Maps (Heatmaps), сравниваем с нашей собственной наивной реализацией.
-- [ ] TODO [**Е**] Реализуем с captum Integrated Gradients, сравниваем с нашей собственной реализацией.
+- [x] [**Е**] Выявляем недостатки и достоинства captum. Captum выглядит удобным инструментом для теста baselines. Формулировка подпункта очень размытая, так что пусть будет done.
+- [x] [**Е**] Saliency Maps - [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1tnS6UncQPrJohfio7nP20w54b6JQcdTE?usp=sharing) Результат в точности совпадает с нашей собственной наивной реализацией.
+- [x] [**Е**] Integrated Gradients - [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/15xZFBi_FCWCgPeG0yFHhkSPjkw4hnkCB?usp=sharing) Визуально похоже, но из-за использования рандома напрямую сравнить результат сложно.
+- [x] [**E**] Captum Insights - [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1V4G5rgcpvq2FgIHM3SzIM63cG_5T6CrJ?usp=sharing) Captum Insights example работает в колабе, нужна новая версия (см. колаб).
 
 ### Analysis of existing visualization methods
 
