@@ -77,7 +77,6 @@ class InputLayer(PlaneLayer):
     def output_size(self, input_size=None):
         return self.input_size[0]
 
-
 class Conv2D(PlaneLayer):
 
     def __init__(self, num_filters=32, filter_size=(1,1), stride=1,
