@@ -113,6 +113,18 @@ class Upsampling(PlaneLayer):
             input_size = input_size[0]
         return self.factor * input_size
 
+class BatchNorm(PlaneLayer):
+
+    def __init__(self, description='BatchNorm'):
+        color = colors.red
+        super(BatchNorm, self).__init__(color=color, description=description)
+
+    def output_size(self, input_size=None):
+        if type(input_size) == tuple:
+            input_size = input_size[0]
+        return input_size
+
+
 
 class Dropout(PlaneLayer):
 
