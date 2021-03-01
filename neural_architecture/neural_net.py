@@ -24,7 +24,7 @@ class NN(object):
         self.layers.append(layer)
 
     def _resize_plane_layers(self):
-        plane_layers = [l for l in self.layers if not type(l) == DenseLayer]
+        plane_layers = [l for l in self.layers if 'DenseLayer' not in str(type(l))]
 
         input_size = plane_layers[0].input_size
         try:
@@ -50,7 +50,7 @@ class NN(object):
 
 
     def _resize_dense_layers(self):
-        dense_layers = [l for l in self.layers if type(l) == DenseLayer]
+        dense_layers = [l for l in self.layers if 'DenseLayer' in str(type(l))]
         for l in dense_layers:
             l.num_render = l.num_units
 
