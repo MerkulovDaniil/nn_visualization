@@ -106,6 +106,7 @@ class Intevis:
             response = requests.get(link)
             self.x_raw = Image.open(BytesIO(response.content))
             self.x = self.preprocess(self.x_raw)
+        self.x = self.x.to(self.device)
 
     def set_model(self, model=None, name=None):
         if model is None:
@@ -127,6 +128,7 @@ class Intevis:
 
         if fpath:
             plt.savefig(fpath, bbox_inches='tight')
+            clear_plt()
             return True
         else:
             plt.show()
@@ -141,6 +143,7 @@ class Intevis:
 
         if fpath:
             plt.savefig(fpath, bbox_inches='tight')
+            clear_plt()
             return True
         else:
             plt.show()
@@ -156,6 +159,7 @@ class Intevis:
 
         if fpath:
             plt.savefig(fpath, bbox_inches='tight')
+            clear_plt()
             return True
         else:
             plt.show()
@@ -170,6 +174,7 @@ class Intevis:
 
         if fpath:
             plt.savefig(fpath, bbox_inches='tight')
+            clear_plt()
             return True
         else:
             plt.show()
@@ -252,6 +257,13 @@ class Intevis:
         y = self.model(x)
         return torchviz.make_dot(y.mean(),
             params=dict(self.model.named_parameters()))
+
+
+def clear_plt():
+    plt.figure().clear()
+    plt.close()
+    plt.cla()
+    plt.clf()
 
 
 def img_to_tensor(img, sz=224):
