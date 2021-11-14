@@ -173,8 +173,10 @@ class Intevis:
         if self.sm is None:
             return False
 
+        x = self.sm.cpu()
+
         fig = plt.figure(figsize=(6, 6))
-        plt.imshow(self.sm, cmap=plt.cm.hot)
+        plt.imshow(x, cmap=plt.cm.hot)
         plt.axis('off')
 
         if fpath:
