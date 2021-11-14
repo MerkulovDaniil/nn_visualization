@@ -74,7 +74,8 @@ class Intevis:
     def run(self):
         self.model.eval()
         self.y = self.model(self.x)
-        self.y_name = self.classes[torch.argmax(self.y[0, :]).numpy().tolist()]
+        args = torch.argmax(self.y[0, :]).cpu().numpy().tolist()
+        self.y_name = self.classes[args]
 
     def run_am(self, layer, filter, lr, iters, is_random, sz=224):
         if is_random:
