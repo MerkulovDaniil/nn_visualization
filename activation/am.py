@@ -16,7 +16,7 @@ class AmHook():
         self.G = inp[0]
 
 
-def am(model, layer, filter, x0, device, lr=1., iters=30, eps=1.E-7):
+def am(model, layer, filter, x0, device, lr=0.1, iters=30, eps=1.E-7):
     """Activation maximization for selected layer and filter for the model."""
     x = x0.detach().clone().to(device)
     x.requires_grad = True
