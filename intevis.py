@@ -92,7 +92,7 @@ class Intevis:
         x = torch.squeeze(self.x, 0)
         x = torch.swapaxes(x, 0, 1)
         x = torch.swapaxes(x, 1, 2)
-        x = x.detach().numpy()
+        x = x.cpu().detach().numpy()
 
         self.ig = ig(self.model, x, steps, self.device)
 
