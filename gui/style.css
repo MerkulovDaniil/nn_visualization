@@ -1,0 +1,120 @@
+:root {
+  --color-p: #034f84;
+  --color-s: #50394c;
+  --color-t: #618685;
+  --color-a: #bc5a45;
+  --color-w: #d64161;
+}
+.cs-msg {
+  padding-left: 10px;
+  font-size: 16px;
+}
+.cs-msg__date {
+  display: inline-block;
+  width: 80px;
+  font-weight: bold;
+  color: var(--color-p);
+  padding-right: 5px;
+}
+.cs-msg__kind {
+  display: inline-block;
+  width: 60px;
+  font-weight: bold;
+  padding-right: 5px;
+}
+.cs-msg__kind-prc {
+  color: var(--color-p);
+}
+.cs-msg__kind-res {
+  color: var(--color-t);
+}
+.cs-msg__kind-wrn {
+  color: var(--color-w);
+}
+.cs-msg__kind-err {
+  color: red;
+}
+.cs-msg__kind-ftl {
+  color: red;
+}
+.cs-msg__text {
+  color: var(--color-s);
+}
+.e-box-h {
+
+}
+.e-button {
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+  color: var(--color-p);
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.e-dropdown {
+
+}
+.e-element {
+
+}
+.e-figure {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+.e-figure__image {
+
+}
+.e-figure__label {
+  color: var(--color-p);
+  font-size: 16px;
+  font-weight: bold;
+}
+.e-image {
+
+}
+.e-input {
+
+}
+.e-input-bool {
+
+}
+.e-input-int {
+
+}
+.e-input-float {
+
+}
+.e-output {
+
+}
+.e-panel {
+  border-top-right-radius: 20px;
+  border-top: 3px solid var(--color-a);
+  border-right: 3px solid var(--color-a);
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+.e-table {
+
+}
+.e-table__name {
+  border-top: 1px solid var(--color-t);
+  color var(--color-p);
+  font-weight: bold;
+}
+.e-table__text {
+  border-top: 1px solid var(--color-t);
+  color var(--color-s);
+}
+.e-tabs {
+  box-shadow:
+       inset 0 -3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px rgb(255,255,255),
+             0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+.e-text {
+
+}
+.e-upload {
+
+}
+.e-window {
+
+}
