@@ -138,8 +138,10 @@ class Intevis:
         if self.am is None:
             return False
 
+        x = self.am.cpu()
+
         fig = plt.figure(figsize=(6, 6))
-        plt.imshow(tensor_to_plot(tensor_to_img(self.am, sat=0.2, br=0.8)))
+        plt.imshow(tensor_to_plot(tensor_to_img(x, sat=0.2, br=0.8)))
         plt.axis('off')
 
         if fpath:
@@ -153,9 +155,11 @@ class Intevis:
         if self.ig is None:
             return False
 
+        x = self.ig # It is numpy!
+
         fig = plt.figure(figsize=(6, 6))
         # TODO Check why np.uint8 below
-        plt.imshow(np.uint8(self.ig), cmap=plt.cm.hot)
+        plt.imshow(np.uint8(x), cmap=plt.cm.hot)
         plt.axis('off')
 
         if fpath:
