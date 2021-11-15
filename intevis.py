@@ -62,63 +62,6 @@ class Intevis:
         self.opts.app_height = height
         Gui(self, self.opts)
 
-    def preprocess(self, image, size=224):
-        transform = torchvision.transforms.Compose([
-            torchvision.transforms.Resize((size, size)),
-            torchvision.transforms.ToTensor(),
-            torchvision.transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-            torchvision.transforms.Lambda(lambda x: x[None]),
-        ])
-        return transform(image)
-
-    def run(self):
-        self.model.eval()
-        self.y = self.model(self.x)
-        args = torch.argmax(self.y[0, :]).cpu().numpy().tolist()
-        self.y_name = self.classes[args]
-
-    def run_am(self, layer, filter, lr, iters, is_random, sz=224):
-        if is_random:
-            x = tensor_rand(sz)
-        else:
-            x = self.x
-
-        self.am = am(self.model, layer, filter, x, self.device, lr, iters)
-
-    def run_ar(self):
-        return
-
-    def run_ig(self, steps):
-        x = torch.squeeze(self.x, 0)
-        x = torch.swapaxes(x, 0, 1)
-        x = torch.swapaxes(x, 1, 2)
-        x = x.cpu().detach().numpy()
-
-        self.ig = ig(self.model, x, steps, self.device)
-
-    def run_sm(self):
-        self.sm = sm(self.model, self.x)
-
-    def set_image(self, data=None, link=None):
-        if data is not None:
-            self.x_raw = Image.open(BytesIO(data))
-            self.x = self.preprocess(self.x_raw)
-        elif link is not None:
-            response = requests.get(link)
-            self.x_raw = Image.open(BytesIO(response.content))
-            self.x = self.preprocess(self.x_raw)
-        self.x = self.x.to(self.device)
-
-    def set_model(self, model=None, name=None):
-        if model is None:
-            self.model = torch.hub.load('pytorch/vision', name, pretrained=True)
-            # self.model = torchvision.models.vgg16(pretrained=True)
-            self.model.to(self.device)
-        else:
-            self.model = model
-
-        self.model_name = name
-
     def plot(self, fpath=None):
         if self.x_raw is None:
             return False
@@ -217,6 +160,59 @@ class Intevis:
             return True
         else:
             plt.show()
+
+    def preprocess(self, image, size=224):
+        transform = torchvision.transforms.Compose([
+            torchvision.transforms.Resize((size, size)),
+            torchvision.transforms.ToTensor(),
+            torchvision.transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+            torchvision.transforms.Lambda(lambda x: x[None]),
+        ])
+        return transform(image)
+
+    def run(self):
+        self.model.eval()
+        self.y = self.model(self.x)
+        args = torch.argmax(self.y[0, :]).cpu().numpy().tolist()
+        self.y_name = self.classes[args]
+
+    def run_am(self, layer, filter, lr, iters, is_random, sz=224):
+        if is_random:
+            x = tensor_rand(sz)
+        else:
+            x = self.x
+
+        self.am = am(self.model, layer, filter, x, self.device, lr, iters)
+
+    def run_ar(self):
+        return
+
+    def run_ig(self, steps):
+        x = np.array(self.x_raw)
+
+        self.ig = ig(self.model, x, steps, self.device)
+
+    def run_sm(self):
+        self.sm = sm(self.model, self.x)
+
+    def set_image(self, data=None, link=None):
+        if data is not None:
+            self.x_raw = Image.open(BytesIO(data))
+            self.x = self.preprocess(self.x_raw)
+        elif link is not None:
+            response = requests.get(link)
+            self.x_raw = Image.open(BytesIO(response.content))
+            self.x = self.preprocess(self.x_raw)
+        self.x = self.x.to(self.device)
+
+    def set_model(self, model=None, name=None):
+        if model is None:
+            self.model = torch.hub.load('pytorch/vision', name, pretrained=True)
+            self.model.to(self.device)
+        else:
+            self.model = model
+
+        self.model_name = name
 
     def vis_arc_1(self):
         """Old architecture visualiztion #1."""
