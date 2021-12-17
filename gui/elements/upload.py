@@ -5,17 +5,17 @@ from element import Element
 
 
 class Upload(Element):
-    def __init__(self, types='.png,.jpg', kind='p'):
+    def __init__(self, types='.png,.jpg', kind='p', multiple=False):
         self.types = types
         self.kind = kind
 
         self.set()
-        self.build()
+        self.build(multiple)
 
-    def build(self):
+    def build(self, multiple=False):
         self.wgt = ipywidgets.FileUpload(
             accept=self.types,
-            multiple=False,
+            multiple=multiple,
             layout=self.layout())
 
         self.wgt.add_class('e-element')
