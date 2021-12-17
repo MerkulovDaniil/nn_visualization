@@ -12,7 +12,6 @@ from elements.window import Window
 
 from component import Component
 
-
 class Md(Component):
     """Вкладка "Модель"."""
     def build(self):
@@ -22,7 +21,6 @@ class Md(Component):
         conts = [self.win_image, self.win_table]
         self.wgt = Window(self.panel, conts)
         self.wgt.set(h=self.opts.app_height).build()
-
         return self
 
     def build_content(self):
@@ -31,6 +29,12 @@ class Md(Component):
 
     def build_panel(self):
         self.model = Dropdown(self.opts.model_list)
+
+        self.model_file = Upload(types='.py')
+
+        self.weights_files = Upload(types='*', multiple=True)
+
+        self.btn_delete_model = Button(self.on_delete_model, 'Удалить модель и данные') #TODO - добавить кнопку почистить
 
         self.data = Dropdown(self.opts.data_list)
 
@@ -42,6 +46,8 @@ class Md(Component):
 
         self.panel = Panel({
             'Нейронная сеть': self.model,
+            'Файл модели .py': self.model_file,
+            'Дополнительные файлы модели': self.weights_files,
             'Набор данных': self.data,
             'URL изображения': self.image_link,
             'Файл изображения': self.image_file,
@@ -50,6 +56,13 @@ class Md(Component):
     def clear(self):
         self.win_image.clear()
         self.win_table.clear()
+
+    def on_delete_model(self):
+        import os
+        import glob
+        files = glob.glob('custom_models/*')
+        for f in files:
+            os.remove(f)
 
     def on_run(self):
         self.clear()
@@ -64,6 +77,19 @@ class Md(Component):
             image_file = image_file.get('content')
         else:
             image_file = None
+
+        model_file = (self.model_file.wgt.value or {}).values()
+        if len(model_file) > 0:
+            model_file = next(iter(model_file))
+            with open("custom_models/custom_model.py", "wb+") as fp:
+                fp.write(model_file['content'])
+        
+        weights_files = self.weights_files.wgt.value
+        # print(weights_files)
+        for weights_name, weights_file in (weights_files or {}).items():
+            print(weights_name)
+            with open(f"custom_models/{weights_name}", "wb+") as fp:
+                fp.write(weights_file['content'])
 
         data = {
             'data': self.data.wgt.value,
