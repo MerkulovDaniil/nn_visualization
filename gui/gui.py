@@ -144,7 +144,9 @@ class Gui:
                 self.cs.log('Загрузка модели из файла', 'prc')
                 try:
                     from custom_models.custom_model import custom_model
-                    custom_model.cuda()
+                    import torch
+                    if torch.cuda.is_available():
+                        custom_model.cuda()                        
                     self.iv.set_model(model=custom_model, name=data['model'])
                 except:
                     self.cs.log('Неудачная загрузка модели', 'err')
