@@ -6,6 +6,16 @@ from element import Element
 
 class Dropdown(Element):
     def __init__(self, values=[], kind='p'):
+        """Раскрывающееся меню, элемент пользовательского интерфейса.
+
+        Args:
+            values (list): возможные опции для выбора. Каждый элемент списка
+                должен быть строкой.
+            kind (str): Тип элемента ('p' - 'primary', 's' - 'secondary',
+                't' - tertiary, 'a' - 'accent', 'w' - warning), используется для
+                выбора способа стилизации.
+
+        """
         self.values = values
         self.kind = kind
 
@@ -13,6 +23,12 @@ class Dropdown(Element):
         self.build()
 
     def build(self):
+        """Метод осуществляет непосредственно построение элемента.
+
+        Returns:
+            Dropdown: текущий экзепляр класса.
+
+        """
         self.wgt = ipywidgets.Dropdown(
             options=self.values,
             value=self.values[0] if len(self.values) > 0 else None,
@@ -20,20 +36,5 @@ class Dropdown(Element):
 
         self.wgt.add_class('e-element')
         self.wgt.add_class('e-dropdown')
-
-        return self
-
-    def layout(self):
-        return ipywidgets.Layout(
-            margin                  = '0px',
-            width                   = self.w,
-            height                  = self.h,
-            min_width               = '50px',
-            padding                 = '0px',
-        )
-
-    def set(self, w='auto', h='auto'):
-        self.w = w
-        self.h = h
 
         return self

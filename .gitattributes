@@ -1,0 +1,10 @@
+*.bat linguist-detectable=false
+*.css linguist-detectable=false
+*.html linguist-detectable=false
+*.ipynb linguist-detectable=false
+*.js linguist-detectable=false
+*.md linguist-detectable=false
+*.py linguist-detectable=true
+*.rst linguist-detectable=false
+*.txt linguist-detectable=false
+Makefile linguist-detectable=false

@@ -8,6 +8,16 @@ from text import Text
 
 class Figure(Element):
     def __init__(self, fpath, title, kind='p'):
+        """Изображение с подписью, элемент пользовательского интерфейса.
+
+        Args:
+            fpath (str): путь к файлу с изображением.
+            title (str): подпись к изображению.
+            kind (str): Тип элемента ('p' - 'primary', 's' - 'secondary',
+                't' - tertiary, 'a' - 'accent', 'w' - warning), используется для
+                выбора способа стилизации.
+
+        """
         self.fpath = fpath
         self.title = title
         self.kind = kind
@@ -16,11 +26,17 @@ class Figure(Element):
         self.build()
 
     def build(self):
+        """Метод осуществляет непосредственно построение элемента.
+
+        Returns:
+            Figure: текущий экзепляр класса.
+
+        """
         self.label = Text(self.title)
-        self.label.wgt.add_class('e-figure__label')
+        self.label.add_class('e-figure__label')
 
         self.image = Image(self.fpath).set(h='250px').build()
-        self.image.wgt.add_class('e-figure__image')
+        self.image.add_class('e-figure__image')
 
         children = [self.label.wgt, self.image.wgt]
         self.wgt = ipywidgets.GridBox(children=children, layout=self.layout())
@@ -31,6 +47,12 @@ class Figure(Element):
         return self
 
     def layout(self):
+        """Метод возвращает лейаут (разметку) для элемента.
+
+        Returns:
+            ipywidgets.Layout: разметка для элемента.
+
+        """
         return ipywidgets.Layout(
             margin                  = '0px',
             width                   = self.w,
@@ -44,6 +66,16 @@ class Figure(Element):
         )
 
     def set(self, w='100%', h='300px'):
+        """Метод для задания дополнительных свойств элемента.
+
+        Args:
+            w (str): ширина элемента (например, "100px" или "auto").
+            h (str): высота элемента (например, "100px" или "auto").
+
+        Returns:
+            Figure: текущий экзепляр класса.
+
+        """
         self.w = w
         self.h = h
 
