@@ -139,8 +139,18 @@ class Gui:
                 return
 
             if data['model'] == self.opts.model_list[-1]:
-                self.cs.log('Собственные модели пока что не поддерживаются', 'ftl')
-                return
+                # self.iv.set_model(name=data['model'])
+                # self.cs.log('Собственные модели пока что не поддерживаются', 'ftl')
+                self.cs.log('Загрузка модели из файла', 'prc')
+                try:
+                    from custom_models.custom_model import custom_model
+                    import torch
+                    if torch.cuda.is_available():
+                        custom_model.cuda()                        
+                    self.iv.set_model(model=custom_model, name=data['model'])
+                except:
+                    self.cs.log('Неудачная загрузка модели', 'err')
+                    return
             else:
                 self.cs.log('Загрузка модели', 'prc')
                 self.iv.set_model(name=data['model'])
