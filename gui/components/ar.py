@@ -1,10 +1,11 @@
-from ..elements.button import Button
-from ..elements.output import Output
-from ..elements.panel import Panel
-from ..elements.window import Window
+from elements.button import Button
+from elements.figure import Figure
+from elements.input_int import InputInt
+from elements.output import Output
+from elements.panel import Panel
+from elements.window import Window
 
-
-from .component import Component
+from component import Component
 
 
 class Ar(Component):
@@ -20,10 +21,9 @@ class Ar(Component):
 
     def build_content(self):
         self.cont = Output()
-        self.cont.add_text('TODO')
 
     def build_panel(self):
-        self.btn_run = Button(self.on_run, 'Запустить')
+        self.btn_run = Button(self.on_run, 'Построить')
 
         self.panel = Panel({}, self.btn_run)
 
@@ -36,3 +36,7 @@ class Ar(Component):
         data = {}
 
         self.run(data)
+    
+    def set_image(self, fpath="./tmp/architecture.png"):
+        figure = Figure(fpath, 'Архитектура нейросети')
+        self.cont.add(figure)
