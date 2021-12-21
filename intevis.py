@@ -173,6 +173,13 @@ class Intevis:
 
     def run_ar(self):
         """Запуск метода визуализации архитектуры."""
+        self.model.eval()
+        graph = arch.build_graph(self.model, (torch.zeros([1, 3, 228, 228]).to(self.device)))
+        dot=graph.build_dot()
+        dot.attr("graph", rankdir="TD") #Topdown
+        # dot.attr("graph", rankdir="LR") #Left-Right
+        dot.format = 'png'
+        dot.render('./tmp/architecture')
         return
 
     def run_ig(self, steps):
