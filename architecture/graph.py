@@ -361,7 +361,7 @@ class Graph():
                  fontname=self.theme["font_name"])
 
         for k, n in self.nodes.items():
-            label = "<tr><td cellpadding='2'>{}</td></tr>".format(n.title)
+            label = "<tr><td cellpadding='2'>{}</td></tr>".format(n.title.replace('&gt;','+'))
             if n.caption:
                 label += "<tr><td>{}</td></tr>".format(n.caption)
             if n.n_train_par > 0:    
