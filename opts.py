@@ -5,7 +5,7 @@ class DictDot(dict):
 
 
 opts = DictDot({
-    'model_list': ['vgg13', 'vgg16', 'vgg19', 'own'], # 'alexnet', 'resnet18'
+    'model_list': ['vgg13', 'vgg16', 'vgg19', 'resnet18', 'own'], # 'alexnet', 'resnet18'
     'data_list': ['imagenet'],
     'app_width': '1200px',
     'app_height': '600px',
