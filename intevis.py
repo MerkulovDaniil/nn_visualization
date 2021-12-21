@@ -171,16 +171,21 @@ class Intevis:
 
         self.am = am(self.model, layer, filter, x, self.device, lr, iters)
 
-    def run_ar(self):
+    def run_ar(self, dir=None):
         """Запуск метода визуализации архитектуры."""
         self.model.eval()
-        graph = arch.build_graph(self.model, (torch.zeros([1, 3, 228, 228]).to(self.device)))
-        dot=graph.build_dot()
-        dot.attr("graph", rankdir="TD") #Topdown
-        # dot.attr("graph", rankdir="LR") #Left-Right
+
+        graph = arch.build_graph(
+            self.model, (torch.zeros([1, 3, 228, 228]).to(self.device)))
+        dot = graph.build_dot()
+
+        if dir == 'Горизонтально':
+            dot.attr("graph", rankdir="LR")
+        else:
+            dot.attr("graph", rankdir="TD")
+
         dot.format = 'png'
         dot.render('./tmp/architecture')
-        return
 
     def run_ig(self, steps):
         """Запуск метода атрибуции IG."""

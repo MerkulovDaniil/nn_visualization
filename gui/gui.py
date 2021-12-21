@@ -130,7 +130,7 @@ class Gui:
         """Запуск метода построения архитектуры."""
         with self.dg.log:
             self.cs.log('Построение вычислительного графа', 'prc')
-            self.iv.run_ar()
+            self.iv.run_ar(data['dir'])
             self.cs.log('Построение вычислительного графа завершено', 'res')
             self.cs.log('Построение архитектуры', 'prc')
             self.ar.set_image("./tmp/architecture.png")

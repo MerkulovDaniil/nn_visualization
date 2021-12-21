@@ -1,5 +1,6 @@
 from ..elements.button import Button
-from ..elements.figure import Figure
+from ..elements.dropdown import Dropdown
+from ..elements.image import Image
 from ..elements.input_int import InputInt
 from ..elements.output import Output
 from ..elements.panel import Panel
@@ -23,9 +24,13 @@ class Ar(Component):
         self.cont = Output()
 
     def build_panel(self):
+        self.dir = Dropdown(['Вертикально', 'Горизонтально'])
+
         self.btn_run = Button(self.on_run, 'Построить')
 
-        self.panel = Panel({}, self.btn_run)
+        self.panel = Panel({
+            'Расположение': self.dir,
+        }, self.btn_run)
 
     def clear(self):
         self.cont.clear()
@@ -33,10 +38,12 @@ class Ar(Component):
     def on_run(self):
         self.clear()
 
-        data = {}
+        data = {
+            'dir': self.dir.wgt.value,
+        }
 
         self.run(data)
-    
-    def set_image(self, fpath="./tmp/architecture.png"):
-        figure = Figure(fpath, 'Архитектура нейросети')
-        self.cont.add(figure)
+
+    def set_image(self, fpath='./tmp/architecture.png'):
+        image = Image(fpath).set(w='100%', h='100%').build()
+        self.cont.add(image)
