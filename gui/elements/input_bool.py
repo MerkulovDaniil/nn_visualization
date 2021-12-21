@@ -9,7 +9,7 @@ class InputBool(Element):
         """Поле выбора bool, элемент пользовательского интерфейса.
 
         Args:
-            v (bool): Начальное значение.
+            v (bool): начальное значение.
             help (str): Текст всплывающей подсказки.
             kind (str): тип элемента ('p' - 'primary', 's' - 'secondary',
                 't' - tertiary, 'a' - 'accent', 'w' - warning), используется для
@@ -32,10 +32,11 @@ class InputBool(Element):
             InputBool: текущий экземпляр класса.
 
         """
-        self.wgt = ipywidgets.ToggleButton(
+
+        self.wgt = ipywidgets.Checkbox(
             value=self.v,
-            tooltip=self.help,
-            icon='check',
+            #tooltip=self.help,
+            #icon='check',
             layout=self.layout())
 
         self.wgt.observe(self.on_change, names='value')

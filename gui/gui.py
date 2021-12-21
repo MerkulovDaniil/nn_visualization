@@ -4,19 +4,26 @@ import os
 import random
 
 
-from components.ac import Ac
-from components.ar import Ar
-from components.at import At
-from components.cs import Cs
-from components.dg import Dg
-from components.md import Md
+from .elements.tabs import Tabs
 
 
-from elements.tabs import Tabs
+from .components.ac import Ac
+from .components.ar import Ar
+from .components.at import At
+from .components.cs import Cs
+from .components.dg import Dg
+from .components.md import Md
 
 
 class Gui:
     def __init__(self, iv, opts):
+        """Менеджер пользовательского интерфейса.
+
+        Args:
+            iv (Intevis): экземпляр класса менеджера платформы.
+            opts (dict): словарь с глобальными опциями.
+
+        """
         self.iv = iv
         self.opts = opts
 
@@ -55,6 +62,7 @@ class Gui:
         display(HTML(css))
 
     def run_ac(self, data):
+        """Запуск метода максимизации активаций."""
         with self.dg.log:
             for i, f in enumerate(data['filters']):
                 self.cs.log(f'Построение Act. Max. для фильтра {f}', 'prc')
@@ -72,6 +80,7 @@ class Gui:
                 self.cs.log(f'Act. Max. для фильтра {f} нарисована', 'res')
 
     def run_at(self, data):
+        """Запуск метода атрибуции."""
         with self.dg.log:
             self.cs.log('Отрисовка исходного изображения', 'prc')
             image_file = random_image_path()
@@ -118,15 +127,19 @@ class Gui:
             self.cs.log('TODO-атрибуция нарисована', 'res')
 
     def run_ar(self, data):
+        """Запуск метода построения архитектуры."""
         return
 
     def run_cs(self, data):
+        """Запуск метода вывода в консоль."""
         return
 
     def run_dg(self, data):
+        """Запуск метода вывода в 'debug'."""
         return
 
     def run_md(self, data):
+        """Запуск метода подготовки модели."""
         with self.dg.log:
             self.cs.log('Обработка модели и данных', 'prc')
 
@@ -146,7 +159,7 @@ class Gui:
                     from custom_models.custom_model import custom_model
                     import torch
                     if torch.cuda.is_available():
-                        custom_model.cuda()                        
+                        custom_model.cuda()
                     self.iv.set_model(model=custom_model, name=data['model'])
                 except:
                     self.cs.log('Неудачная загрузка модели', 'err')

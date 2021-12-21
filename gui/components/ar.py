@@ -1,10 +1,10 @@
-from elements.button import Button
-from elements.output import Output
-from elements.panel import Panel
-from elements.window import Window
+from ..elements.button import Button
+from ..elements.output import Output
+from ..elements.panel import Panel
+from ..elements.window import Window
 
 
-from component import Component
+from .component import Component
 
 
 class Ar(Component):

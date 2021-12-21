@@ -1,16 +1,17 @@
-from elements.button import Button
-from elements.dropdown import Dropdown
-from elements.figure import Figure
-from elements.input import Input
-from elements.output import Output
-from elements.panel import Panel
-from elements.table import Table
-from elements.text import Text
-from elements.upload import Upload
-from elements.window import Window
+from ..elements.button import Button
+from ..elements.dropdown import Dropdown
+from ..elements.figure import Figure
+from ..elements.input import Input
+from ..elements.output import Output
+from ..elements.panel import Panel
+from ..elements.table import Table
+from ..elements.text import Text
+from ..elements.upload import Upload
+from ..elements.window import Window
 
 
-from component import Component
+from .component import Component
+
 
 class Md(Component):
     """Вкладка "Модель"."""
@@ -83,7 +84,7 @@ class Md(Component):
             model_file = next(iter(model_file))
             with open("custom_models/custom_model.py", "wb+") as fp:
                 fp.write(model_file['content'])
-        
+
         weights_files = self.weights_files.wgt.value
         # print(weights_files)
         for weights_name, weights_file in (weights_files or {}).items():

@@ -1,11 +1,11 @@
 from datetime import datetime
 
 
-from component import Component
+from ..elements.html import Html
+from ..elements.output import Output
 
 
-from elements.html import Html
-from elements.output import Output
+from .component import Component
 
 
 class Cs(Component):

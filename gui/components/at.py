@@ -1,12 +1,12 @@
-from elements.button import Button
-from elements.figure import Figure
-from elements.input_int import InputInt
-from elements.output import Output
-from elements.panel import Panel
-from elements.window import Window
+from ..elements.button import Button
+from ..elements.figure import Figure
+from ..elements.input_int import InputInt
+from ..elements.output import Output
+from ..elements.panel import Panel
+from ..elements.window import Window
 
 
-from component import Component
+from .component import Component
 
 
 class At(Component):

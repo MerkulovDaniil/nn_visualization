@@ -1,14 +1,14 @@
-from elements.button import Button
-from elements.figure import Figure
-from elements.input_bool import InputBool
-from elements.input_int import InputInt
-from elements.input_float import InputFloat
-from elements.output import Output
-from elements.panel import Panel
-from elements.window import Window
+from ..elements.button import Button
+from ..elements.figure import Figure
+from ..elements.input_bool import InputBool
+from ..elements.input_int import InputInt
+from ..elements.input_float import InputFloat
+from ..elements.output import Output
+from ..elements.panel import Panel
+from ..elements.window import Window
 
 
-from component import Component
+from .component import Component
 
 
 class Ac(Component):
