@@ -9,23 +9,21 @@ import urllib
 import yaml
 
 
-import sys
-sys.path.append('./activation')
-sys.path.append('./attribution')
-sys.path.append('./gui')
-sys.path.append('./gui/components')
-sys.path.append('./gui/elements')
-
-
-from am import am
-from ig import ig
-from sm import sm
-from gui import Gui
+from activation.am import am
+from attribution.ig import ig
+from attribution.sm import sm
+from gui.gui import Gui
 from opts import opts
 
 
 class Intevis:
     def __init__(self, seed=42):
+        """Менеджер программного продукта.
+
+        Args:
+            seed (int): опциональный параметр для генератора случайных чисел.
+
+        """
         torch.manual_seed(seed)
         np.random.seed(seed)
 
@@ -52,114 +50,102 @@ class Intevis:
         self.sm = None
 
     def download_imagenet_classes(self):
+        """Загрузка из сети Интернет описания imagenet классов."""
         classes = ''
         for f in urllib.request.urlopen(self.opts.url.imagenet_classes):
             classes = classes + f.decode('utf-8')
         self.classes = yaml.safe_load(classes)
 
     def gui(self, width='1200px', height='600px'):
+        """Запуск графического пользовательского интерфейса.
+
+        Args:
+            width (str): ширина элемента (например, "1200px").
+            height (str): высота элемента (например, "600px").
+
+        """
         self.opts.app_width = width
         self.opts.app_height = height
         Gui(self, self.opts)
 
     def plot(self, fpath=None):
+        """Построение (графика) входного изображения.
+
+        Args:
+            fpath (str): путь к файлу для сохранения изображения. Если не задан,
+                то производится непосредственная отрисовка изображения.
+
+        Returns:
+            bool: флаг успешности операции (возвращается только при сохранении
+                в файл).
+
+        """
         if self.x_raw is None:
             return False
 
-        fig = plt.figure(figsize=(6, 6))
-        plt.imshow(self.x_raw)
-        plt.axis('off')
+        x = self.x_raw
 
-        if fpath:
-            plt.savefig(fpath, bbox_inches='tight')
-            clear_plt()
-            return True
-        else:
-            plt.show()
+        return plot(x, fpath)
 
     def plot_am(self, fpath=None):
+        """Построение (графика) результата метода AM.
+
+        Args:
+            fpath (str): путь к файлу для сохранения изображения. Если не задан,
+                то производится непосредственная отрисовка изображения.
+
+        Returns:
+            bool: флаг успешности операции (возвращается только при сохранении
+                в файл).
+
+        """
         if self.am is None:
             return False
 
         x = self.am.cpu()
+        x = tensor_to_img(x, sat=0.2, br=0.8)
+        x = tensor_to_plot(x)
 
-        fig = plt.figure(figsize=(6, 6))
-        plt.imshow(tensor_to_plot(tensor_to_img(x, sat=0.2, br=0.8)))
-        plt.axis('off')
-
-        if fpath:
-            plt.savefig(fpath, bbox_inches='tight')
-            clear_plt()
-            return True
-        else:
-            plt.show()
+        return plot(x, fpath)
 
     def plot_ig(self, fpath=None):
+        """Построение (графика) результата метода IG.
+
+        Args:
+            fpath (str): путь к файлу для сохранения изображения. Если не задан,
+                то производится непосредственная отрисовка изображения.
+
+        Returns:
+            bool: флаг успешности операции (возвращается только при сохранении
+                в файл).
+
+        """
         if self.ig is None:
             return False
 
-        x = self.ig # It is numpy!
+        x = self.ig
+        x = np.uint8(x)
 
-        fig = plt.figure(figsize=(6, 6))
-        # TODO Check why np.uint8 below
-        plt.imshow(np.uint8(x), cmap=plt.cm.hot)
-        plt.axis('off')
-
-        if fpath:
-            plt.savefig(fpath, bbox_inches='tight')
-            clear_plt()
-            return True
-        else:
-            plt.show()
+        return plot(x, fpath, with_cmap=True)
 
     def plot_sm(self, fpath=None):
+        """Построение (графика) результата метода SM.
+
+        Args:
+            fpath (str): путь к файлу для сохранения изображения. Если не задан,
+                то производится непосредственная отрисовка изображения.
+
+        Returns:
+            bool: флаг успешности операции (возвращается только при сохранении
+                в файл).
+
+        """
         if self.sm is None:
             return False
 
         x = self.sm.cpu()
 
-        fig = plt.figure(figsize=(6, 6))
-        plt.imshow(x, cmap=plt.cm.hot)
-        plt.axis('off')
-
-        if fpath:
-            plt.savefig(fpath, bbox_inches='tight')
-            clear_plt()
-            return True
-        else:
-            plt.show()
-
-    def plot_tmp(self, fname=None, is_cap=False):
-        """Old plot."""
-        img1 = self.x_raw.resize((224, 224), Image.ANTIALIAS)
-        img2 = self.sm
-
-        fig = plt.figure(figsize=(10, 5))
-        plt.title('Saliency Map')
-        plt.axis('off')
-
-        ax = fig.add_subplot(1, 2, 1)
-        ax.set_xticks([])
-        ax.set_yticks([])
-        ax.set_title(f'Original')
-        ax.imshow(img1)
-
-        ax = fig.add_subplot(1, 2, 2)
-        ax.set_xticks([])
-        ax.set_yticks([])
-        if is_cap:
-            ax.set_title(f'Result [captum]')
-        else:
-            ax.set_title(f'Result')
-        ax.imshow(img2, cmap=plt.cm.hot)
-
-        plt.subplots_adjust(wspace=0, hspace=0)
-
-        if fname:
-            plt.savefig(fname, bbox_inches='tight')
-            return True
-        else:
-            plt.show()
+        return plot(x, fpath, with_cmap=True)
 
     def preprocess(self, image, size=224):
         transform = torchvision.transforms.Compose([
@@ -177,6 +163,7 @@ class Intevis:
         self.y_name = self.classes[args]
 
     def run_am(self, layer, filter, lr, iters, is_random, sz=224):
+        """Запуск метода максимизации активаций."""
         if is_random:
             x = tensor_rand(sz)
         else:
@@ -185,14 +172,17 @@ class Intevis:
         self.am = am(self.model, layer, filter, x, self.device, lr, iters)
 
     def run_ar(self):
+        """Запуск метода визуализации архитектуры."""
         return
 
     def run_ig(self, steps):
+        """Запуск метода атрибуции IG."""
         x = np.array(self.x_raw)
 
         self.ig = ig(self.model, x, steps, self.device)
 
     def run_sm(self):
+        """Запуск метода атрибуции SM."""
         self.sm = sm(self.model, self.x)
 
     def set_image(self, data=None, link=None):
@@ -262,13 +252,6 @@ class Intevis:
             params=dict(self.model.named_parameters()))
 
 
-def clear_plt():
-    plt.figure().clear()
-    plt.close()
-    plt.cla()
-    plt.clf()
-
-
 def img_to_tensor(img, sz=224):
     """Transform PIL image to tensor.
 
@@ -295,6 +278,29 @@ def img_rand(sz):
     img = np.uint8(np.random.uniform(150, 180, (sz, sz, 3)))
     img = torchvision.transforms.functional.to_pil_image(img)
     return img
+
+
+def plot(x, fpath=None, with_cmap=False):
+    fig = plt.figure(figsize=(6, 6))
+    if with_cmap:
+        plt.imshow(x, cmap=plt.cm.hot)
+    else:
+        plt.imshow(x)
+    plt.axis('off')
+
+    if fpath:
+        plt.savefig(fpath, bbox_inches='tight')
+        plot_clear()
+        return True
+    else:
+        plt.show()
+
+
+def plot_clear():
+    plt.figure().clear()
+    plt.close()
+    plt.cla()
+    plt.clf()
 
 
 def tensor_rand(sz):
