@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+    <title>Intevis: менеджер программного продукта &#8212; документация intevis </title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
+    <link rel="search" title="Поиск" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-intevis">
+<span id="intevis"></span><h1>Intevis: менеджер программного продукта<a class="headerlink" href="#module-intevis" title="Ссылка на этот заголовок">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="intevis.img_rand">
+<span class="sig-prename descclassname"><span class="pre">intevis.</span></span><span class="sig-name descname"><span class="pre">img_rand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#img_rand"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.img_rand" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Create random PIL image.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="intevis.img_to_tensor">
+<span class="sig-prename descclassname"><span class="pre">intevis.</span></span><span class="sig-name descname"><span class="pre">img_to_tensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">224</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#img_to_tensor"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.img_to_tensor" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Transform PIL image to tensor.</p>
+<p>It returns a tensor of the shape [1, number of channels, height, width].</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="intevis.tensor_rand">
+<span class="sig-prename descclassname"><span class="pre">intevis.</span></span><span class="sig-name descname"><span class="pre">tensor_rand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#tensor_rand"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.tensor_rand" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Create random PIL image and transform it to tensor.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="intevis.tensor_to_img">
+<span class="sig-prename descclassname"><span class="pre">intevis.</span></span><span class="sig-name descname"><span class="pre">tensor_to_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">br</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#tensor_to_img"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.tensor_to_img" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Normalise tensor with values between [vmin, vmax].</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="intevis.tensor_to_plot">
+<span class="sig-prename descclassname"><span class="pre">intevis.</span></span><span class="sig-name descname"><span class="pre">tensor_to_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#tensor_to_plot"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.tensor_to_plot" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Prepare tensor for image plot.</p>
+<p>It returns a tensor of the shape [number of channels, height, width].</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/favicon.ico" alt="Logo"/>
+    
+    <h1 class="logo logo-name">intevis</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+<h3>Навигация</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../data.html">Формат данных</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../work.html">Интерфейс программы</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Программный код</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020-2021.
+      
+      |
+      <a href="../_sources/code/intevis.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

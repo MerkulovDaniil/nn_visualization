@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>gui.elements.element &#8212; документация intevis </title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/translations.js"></script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Алфавитный указатель" href="../../../genindex.html" />
+    <link rel="search" title="Поиск" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Исходный код gui.elements.element</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">ipywidgets</span>
+
+
+<div class="viewcode-block" id="Element"><a class="viewcode-back" href="../../../code/elements/element.html#gui.elements.element.Element">[документация]</a><span class="k">class</span> <span class="nc">Element</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Базовый класс, представляющий элемент графического интерфейса.</span>
+
+<span class="sd">    Все конкретные элементы графического интерфейса наследуют данный класс.</span>
+<span class="sd">    Каждый элемент должен принимать в качестве аргументов конструктора</span>
+<span class="sd">    основные свойства (например, текст для текстового поля). Вспомогательные</span>
+<span class="sd">    аргументы (например, ширина) должны передаваться в качестве аргументов</span>
+<span class="sd">    метода &quot;set&quot;. В методе &quot;build&quot; в каждом элементе должна быть создана</span>
+<span class="sd">    переменная &quot;self.wgt&quot;, представляющая непосредственно виджет класса</span>
+<span class="sd">    ipywidgets (эта переменная будет использоваться при создании вложенных</span>
+<span class="sd">    элементов, при отрисовке элементов и т.п.).</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Простейший способ создания элемента: &quot;elm = Element(*СВОЙСТВА*)&quot;.</span>
+<span class="sd">        Если необходимо указать вспомогательные аргументы, то создавать</span>
+<span class="sd">        элемент необходимо следующим образом:</span>
+<span class="sd">        &quot;elm = Element(*ВСПОМОГАТЕЛЬНЫЕ СВОЙСТВА*).set(*СВОЙСТВА*).build()&quot;.</span>
+
+<span class="sd">        Конструктор каждого элемента в качестве последнего аргумента должен</span>
+<span class="sd">        иметь &quot;kind&quot;, соответствующий типу элемента, который может быть:</span>
+<span class="sd">        &quot;p&quot; (&quot;primary&quot;), &quot;s&quot; (&quot;secondary&quot;), &quot;t&quot; (&quot;tertiary&quot;), &quot;a&quot;</span>
+<span class="sd">        (&quot;accent&quot;), &quot;w&quot; (&quot;warning&quot;).</span>
+
+<span class="sd">        Каждому элементу (с именем NAME) должен быть задан css-класс</span>
+<span class="sd">        &quot;e-element&quot;, а также &quot;e-NAME&quot;. Описание соответствующих css-стилей</span>
+<span class="sd">        приводится в файле &quot;/gui/style.css&quot;.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;p&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kind</span> <span class="o">=</span> <span class="n">kind</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Element.add_class"><a class="viewcode-back" href="../../../code/elements/element.html#gui.elements.element.Element.add_class">[документация]</a>    <span class="k">def</span> <span class="nf">add_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">class_name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Метод осуществляет добавление css-класса к элементу.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            class_name (str): имя класса.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wgt</span><span class="o">.</span><span class="n">add_class</span><span class="p">(</span><span class="n">class_name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Element.build"><a class="viewcode-back" href="../../../code/elements/element.html#gui.elements.element.Element.build">[документация]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Метод осуществляет непосредственно построение элемента.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wgt</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Element.layout"><a class="viewcode-back" href="../../../code/elements/element.html#gui.elements.element.Element.layout">[документация]</a>    <span class="k">def</span> <span class="nf">layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Метод возвращает лейаут (разметку) для элемента.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ipywidgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span>
+            <span class="n">margin</span>                  <span class="o">=</span> <span class="s1">&#39;0px&#39;</span><span class="p">,</span>
+            <span class="n">width</span>                   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">,</span>
+            <span class="n">height</span>                  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">,</span>
+            <span class="n">min_width</span>               <span class="o">=</span> <span class="s1">&#39;50px&#39;</span><span class="p">,</span>
+            <span class="n">padding</span>                 <span class="o">=</span> <span class="s1">&#39;0px&#39;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Element.set"><a class="viewcode-back" href="../../../code/elements/element.html#gui.elements.element.Element.set">[документация]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Метод для задания дополнительных свойств элемента.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            w (str): ширина элемента (например, &quot;100px&quot; или &quot;auto&quot;).</span>
+<span class="sd">            h (str): высота элемента (например, &quot;100px&quot; или &quot;auto&quot;).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Element: текущий экземпляр класса.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">h</span>
+
+        <span class="k">return</span> <span class="bp">self</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../../index.html">
+    <img class="logo" src="../../../_static/favicon.ico" alt="Logo"/>
+    
+    <h1 class="logo logo-name">intevis</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+<h3>Навигация</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../data.html">Формат данных</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../work.html">Интерфейс программы</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../code/index.html">Программный код</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Код модуля</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020-2021.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
