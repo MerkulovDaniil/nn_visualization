@@ -1,7 +1,7 @@
 import ipywidgets
 
 
-from element import Element
+from .element import Element
 
 
 class Button(Element):
@@ -11,9 +11,9 @@ class Button(Element):
         Args:
             callback (func): функция (без аргументов) вызывается при клике на
                 кнопку.
-            text (str): Отображаемый текст на кнопке.
-            help (str): Текст всплывающей подсказки.
-            kind (str): Тип элемента ('p' - 'primary', 's' - 'secondary',
+            text (str): отображаемый текст на кнопке.
+            help (str): текст всплывающей подсказки.
+            kind (str): тип элемента ('p' - 'primary', 's' - 'secondary',
                 't' - tertiary, 'a' - 'accent', 'w' - warning), используется для
                 выбора способа стилизации.
 
@@ -35,7 +35,7 @@ class Button(Element):
         """Метод осуществляет непосредственно построение элемента.
 
         Returns:
-            Button: текущий экзепляр класса.
+            Button: текущий экземпляр класса.
 
         """
         self.wgt = ipywidgets.Button(

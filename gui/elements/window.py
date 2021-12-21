@@ -1,11 +1,21 @@
 import ipywidgets
 
 
-from element import Element
+from .element import Element
 
 
 class Window(Element):
     def __init__(self, panel, conts, kind='p'):
+        """Окно с элементами и панелью, элемент пользовательского интерфейса.
+
+        Args:
+            panel (Panel): панель, отображаемая в левой части окна.
+            conts (list): список элементов, входящих в окно.
+            kind (str): тип элемента ('p' - 'primary', 's' - 'secondary',
+                't' - tertiary, 'a' - 'accent', 'w' - warning), используется для
+                выбора способа стилизации.
+
+        """
         self.panel = panel
         self.conts = conts
         self.kind = kind
@@ -14,6 +24,12 @@ class Window(Element):
         self.build()
 
     def build(self):
+        """Метод осуществляет непосредственно построение элемента.
+
+        Returns:
+            Window: текущий экземпляр класса.
+
+        """
         self.wgt = ipywidgets.GridBox(layout=self.layout())
 
         self.panel.wgt.layout.grid_area = 'panel'
@@ -32,6 +48,12 @@ class Window(Element):
         return self
 
     def layout(self):
+        """Метод возвращает лейаут (разметку) для элемента.
+
+        Returns:
+            ipywidgets.Layout: разметка для элемента.
+
+        """
         if len(self.conts) == 1:
             gtc = '350px 1fr'
             gtr = '1fr'
@@ -77,6 +99,16 @@ class Window(Element):
         )
 
     def set(self, w='100%', h='100%'):
+        """Метод для задания дополнительных свойств элемента.
+
+        Args:
+            w (str): ширина элемента (например, "100px" или "auto").
+            h (str): высота элемента (например, "100px" или "auto").
+
+        Returns:
+            Window: текущий экземпляр класса.
+
+        """
         self.w = w
         self.h = h
 

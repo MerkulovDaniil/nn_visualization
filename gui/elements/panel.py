@@ -1,11 +1,21 @@
 import ipywidgets
 
 
-from element import Element
+from .element import Element
 
 
 class Panel(Element):
     def __init__(self, items={}, button=None, kind='p'):
+        """Упорядоченный набор элементов, элемент пользовательского интерфейса.
+
+        Args:
+            items (dict): словарь с именованными элементами, входящими в панель.
+            button (Element): опциональная кнопка, добавляемая в конец панели.
+            kind (str): тип элемента ('p' - 'primary', 's' - 'secondary',
+                't' - tertiary, 'a' - 'accent', 'w' - warning), используется для
+                выбора способа стилизации.
+
+        """
         self.items = items
         self.button = button
         self.kind = kind
@@ -14,6 +24,12 @@ class Panel(Element):
         self.build()
 
     def build(self):
+        """Метод осуществляет непосредственно построение элемента.
+
+        Returns:
+            Panel: текущий экземпляр класса.
+
+        """
         children = []
         for i, [name, item] in enumerate(self.items.items(), 1):
             text_wgt = ipywidgets.Label(value=name)
@@ -36,6 +52,12 @@ class Panel(Element):
         return self
 
     def layout(self):
+        """Метод возвращает лейаут (разметку) для элемента.
+
+        Returns:
+            ipywidgets.Layout: разметка для элемента.
+
+        """
         n = len(self.items.keys())
         gtc = '4fr 5fr'
         gtr = 'min-content ' * n
@@ -61,6 +83,16 @@ class Panel(Element):
         )
 
     def set(self, w='350px', h='auto'):
+        """Метод для задания дополнительных свойств элемента.
+
+        Args:
+            w (str): ширина элемента (например, "100px" или "auto").
+            h (str): высота элемента (например, "100px" или "auto").
+
+        Returns:
+            Panel: текущий экземпляр класса.
+
+        """
         self.w = w
         self.h = h
 

@@ -1,7 +1,7 @@
 import ipywidgets
 
 
-from element import Element
+from .element import Element
 
 
 class Dropdown(Element):
@@ -11,7 +11,7 @@ class Dropdown(Element):
         Args:
             values (list): возможные опции для выбора. Каждый элемент списка
                 должен быть строкой.
-            kind (str): Тип элемента ('p' - 'primary', 's' - 'secondary',
+            kind (str): тип элемента ('p' - 'primary', 's' - 'secondary',
                 't' - tertiary, 'a' - 'accent', 'w' - warning), используется для
                 выбора способа стилизации.
 
@@ -26,7 +26,7 @@ class Dropdown(Element):
         """Метод осуществляет непосредственно построение элемента.
 
         Returns:
-            Dropdown: текущий экзепляр класса.
+            Dropdown: текущий экземпляр класса.
 
         """
         self.wgt = ipywidgets.Dropdown(

@@ -1,12 +1,22 @@
 import ipywidgets
 
 
-from element import Element
-from text import Text
+from .element import Element
+from .text import Text
 
 
 class Table(Element):
     def __init__(self, items={}, kind='p'):
+        """Таблица элементов, элемент пользовательского интерфейса.
+
+        Args:
+            items (dict): словарь с именованными элементами, входящими в
+                таблицу.
+            kind (str): тип элемента ('p' - 'primary', 's' - 'secondary',
+                't' - tertiary, 'a' - 'accent', 'w' - warning), используется для
+                выбора способа стилизации.
+
+        """
         self.items = items
         self.kind = kind
 
@@ -14,6 +24,12 @@ class Table(Element):
         self.build()
 
     def build(self):
+        """Метод осуществляет непосредственно построение элемента.
+
+        Returns:
+            Table: текущий экземпляр класса.
+
+        """
         children = []
         for i, [name, item] in enumerate(self.items.items(), 1):
             name = Text(name)
@@ -33,6 +49,12 @@ class Table(Element):
         return self
 
     def layout(self):
+        """Метод возвращает лейаут (разметку) для элемента.
+
+        Returns:
+            ipywidgets.Layout: разметка для элемента.
+
+        """
         n = len(self.items.keys())
         gtc = '5fr 5fr'
         gtr = 'min-content ' * n
@@ -54,6 +76,16 @@ class Table(Element):
         )
 
     def set(self, w='350px', h='auto'):
+        """Метод для задания дополнительных свойств элемента.
+
+        Args:
+            w (str): ширина элемента (например, "100px" или "auto").
+            h (str): высота элемента (например, "100px" или "auto").
+
+        Returns:
+            Table: текущий экземпляр класса.
+
+        """
         self.w = w
         self.h = h
 

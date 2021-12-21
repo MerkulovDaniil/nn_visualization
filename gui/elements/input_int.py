@@ -1,11 +1,22 @@
 import ipywidgets
 
 
-from element import Element
+from .element import Element
 
 
 class InputInt(Element):
     def __init__(self, v=None, v_min=None, v_max=None, kind='p'):
+        """Поле ввода int, элемент пользовательского интерфейса.
+
+        Args:
+            v (int): начальное значение.
+            v_min (int): минимальное возможное значение.
+            v_max (int): максимальное возможное значение.
+            kind (str): тип элемента ('p' - 'primary', 's' - 'secondary',
+                't' - tertiary, 'a' - 'accent', 'w' - warning), используется для
+                выбора способа стилизации.
+
+        """
         self.v = v
         self.v_min = v_min
         self.v_max = v_max
@@ -17,6 +28,12 @@ class InputInt(Element):
         self.build()
 
     def build(self):
+        """Метод осуществляет непосредственно построение элемента.
+
+        Returns:
+            InputInt: текущий экземпляр класса.
+
+        """
         self.wgt = ipywidgets.IntSlider(
             value=self.v,
             min=self.v_min,
@@ -32,6 +49,12 @@ class InputInt(Element):
         return self
 
     def layout(self):
+        """Метод возвращает лейаут (разметку) для элемента.
+
+        Returns:
+            ipywidgets.Layout: разметка для элемента.
+
+        """
         return ipywidgets.Layout(
             margin                  = '0px',
             width                   = self.w,
@@ -41,4 +64,5 @@ class InputInt(Element):
         )
 
     def on_change(self, change):
+        """Метод вызывается при изменении пользователем содержимого элемента."""
         self.value = change['new']

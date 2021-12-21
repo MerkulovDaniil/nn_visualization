@@ -1,11 +1,22 @@
 import ipywidgets
 
 
-from element import Element
+from .element import Element
 
 
 class Upload(Element):
     def __init__(self, types='.png,.jpg', kind='p', multiple=False):
+        """Загрузка файла, элемент пользовательского интерфейса.
+
+        Args:
+            types (str): поддерживаемые типы файлов.
+            kind (str): тип элемента ('p' - 'primary', 's' - 'secondary',
+                't' - tertiary, 'a' - 'accent', 'w' - warning), используется для
+                выбора способа стилизации.
+            multiple (bool): если True, то поддерживается загрузка сразу
+                нескольких файлов (в текущей версии не поддерживается).
+
+        """
         self.types = types
         self.kind = kind
 
@@ -13,6 +24,12 @@ class Upload(Element):
         self.build(multiple)
 
     def build(self, multiple=False):
+        """Метод осуществляет непосредственно построение элемента.
+
+        Returns:
+            Upload: текущий экземпляр класса.
+
+        """
         self.wgt = ipywidgets.FileUpload(
             accept=self.types,
             multiple=multiple,
@@ -24,6 +41,12 @@ class Upload(Element):
         return self
 
     def layout(self):
+        """Метод возвращает лейаут (разметку) для элемента.
+
+        Returns:
+            ipywidgets.Layout: разметка для элемента.
+
+        """
         return ipywidgets.Layout(
             margin                  = '0px',
             width                   = self.w,

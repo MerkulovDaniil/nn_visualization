@@ -2,7 +2,7 @@ from IPython.display import display
 import ipywidgets
 
 
-from element import Element
+from .element import Element
 
 
 class Html(Element):
@@ -11,7 +11,7 @@ class Html(Element):
 
         Args:
             content (str): произвольное содержимое.
-            kind (str): Тип элемента ('p' - 'primary', 's' - 'secondary',
+            kind (str): тип элемента ('p' - 'primary', 's' - 'secondary',
                 't' - tertiary, 'a' - 'accent', 'w' - warning), используется для
                 выбора способа стилизации.
 
@@ -30,7 +30,7 @@ class Html(Element):
         """Метод осуществляет непосредственно построение элемента.
 
         Returns:
-            Html: текущий экзепляр класса.
+            Html: текущий экземпляр класса.
 
         """
         self.wgt = ipywidgets.HTML(value=self.content, layout=self.layout())
@@ -60,7 +60,7 @@ class Html(Element):
         """Метод для задания дополнительных свойств элемента.
 
         Returns:
-            Html: текущий экзепляр класса.
+            Html: текущий экземпляр класса.
 
         """
         return self

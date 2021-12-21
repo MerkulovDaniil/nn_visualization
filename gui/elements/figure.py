@@ -1,9 +1,9 @@
 import ipywidgets
 
 
-from element import Element
-from image import Image
-from text import Text
+from .element import Element
+from .image import Image
+from .text import Text
 
 
 class Figure(Element):
@@ -13,7 +13,7 @@ class Figure(Element):
         Args:
             fpath (str): путь к файлу с изображением.
             title (str): подпись к изображению.
-            kind (str): Тип элемента ('p' - 'primary', 's' - 'secondary',
+            kind (str): тип элемента ('p' - 'primary', 's' - 'secondary',
                 't' - tertiary, 'a' - 'accent', 'w' - warning), используется для
                 выбора способа стилизации.
 
@@ -29,7 +29,7 @@ class Figure(Element):
         """Метод осуществляет непосредственно построение элемента.
 
         Returns:
-            Figure: текущий экзепляр класса.
+            Figure: текущий экземпляр класса.
 
         """
         self.label = Text(self.title)
@@ -73,7 +73,7 @@ class Figure(Element):
             h (str): высота элемента (например, "100px" или "auto").
 
         Returns:
-            Figure: текущий экзепляр класса.
+            Figure: текущий экземпляр класса.
 
         """
         self.w = w
