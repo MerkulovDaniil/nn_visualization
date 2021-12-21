@@ -128,7 +128,14 @@ class Gui:
 
     def run_ar(self, data):
         """Запуск метода построения архитектуры."""
-        return
+        with self.dg.log:
+            self.cs.log('Построение вычислительного графа', 'prc')
+            self.iv.run_ar()
+            self.cs.log('Построение вычислительного графа завершено', 'res')
+            self.cs.log('Построение архитектуры', 'prc')
+            self.ar.set_image("./tmp/architecture.png")
+            self.cs.log('Построение архитектуры завершено', 'res')
+            return
 
     def run_cs(self, data):
         """Запуск метода вывода в консоль."""
