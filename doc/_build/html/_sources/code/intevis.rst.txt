@@ -1,5 +1,5 @@
 Intevis: менеджер программного продукта
 ---------------------------------------
 
-.. automodule:: intevis
+.. autoclass:: intevis.Intevis
   :inherited-members:

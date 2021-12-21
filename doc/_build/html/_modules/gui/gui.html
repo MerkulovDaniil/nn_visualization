@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>gui.gui &#8212; документация intevis </title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Алфавитный указатель" href="../../genindex.html" />
+    <link rel="search" title="Поиск" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Исходный код gui.gui</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+
+<span class="kn">from</span> <span class="nn">.elements.tabs</span> <span class="kn">import</span> <span class="n">Tabs</span>
+
+
+<span class="kn">from</span> <span class="nn">.components.ac</span> <span class="kn">import</span> <span class="n">Ac</span>
+<span class="kn">from</span> <span class="nn">.components.ar</span> <span class="kn">import</span> <span class="n">Ar</span>
+<span class="kn">from</span> <span class="nn">.components.at</span> <span class="kn">import</span> <span class="n">At</span>
+<span class="kn">from</span> <span class="nn">.components.cs</span> <span class="kn">import</span> <span class="n">Cs</span>
+<span class="kn">from</span> <span class="nn">.components.dg</span> <span class="kn">import</span> <span class="n">Dg</span>
+<span class="kn">from</span> <span class="nn">.components.md</span> <span class="kn">import</span> <span class="n">Md</span>
+
+
+<div class="viewcode-block" id="Gui"><a class="viewcode-back" href="../../code/gui/gui.html#gui.gui.Gui">[документация]</a><span class="k">class</span> <span class="nc">Gui</span><span class="p">:</span>
+<div class="viewcode-block" id="Gui.__init__"><a class="viewcode-back" href="../../code/gui/gui.html#gui.gui.Gui.__init__">[документация]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">opts</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Менеджер пользовательского интерфейса.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            iv (Intevis): экземпляр класса менеджера платформы.</span>
+<span class="sd">            opts (dict): словарь с глобальными опциями.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iv</span> <span class="o">=</span> <span class="n">iv</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">opts</span> <span class="o">=</span> <span class="n">opts</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_css</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">md</span> <span class="o">=</span> <span class="n">Md</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_md</span><span class="p">)</span> <span class="c1"># Вкладка &quot;Модель&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ar</span> <span class="o">=</span> <span class="n">Ar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_ar</span><span class="p">)</span> <span class="c1"># Вкладка &quot;Архитектура&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ac</span> <span class="o">=</span> <span class="n">Ac</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_ac</span><span class="p">)</span> <span class="c1"># Вкладка &quot;Активация&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">at</span> <span class="o">=</span> <span class="n">At</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_at</span><span class="p">)</span> <span class="c1"># Вкладка &quot;Атрибуция&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cs</span> <span class="o">=</span> <span class="n">Cs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_cs</span><span class="p">)</span> <span class="c1"># Вкладка &quot;Консоль&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dg</span> <span class="o">=</span> <span class="n">Dg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_dg</span><span class="p">)</span> <span class="c1"># Вкладка &quot;DEBUG&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span> <span class="o">=</span> <span class="n">Tabs</span><span class="p">({</span>
+            <span class="s1">&#39;Модель&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">md</span><span class="o">.</span><span class="n">wgt</span><span class="p">,</span>
+            <span class="s1">&#39;Архитектура&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ar</span><span class="o">.</span><span class="n">wgt</span><span class="p">,</span>
+            <span class="s1">&#39;Активация&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">wgt</span><span class="p">,</span>
+            <span class="s1">&#39;Атрибуция&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">at</span><span class="o">.</span><span class="n">wgt</span><span class="p">,</span>
+            <span class="s1">&#39;Консоль&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">wgt</span><span class="p">,</span>
+            <span class="s1">&#39;DEBUG&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dg</span><span class="o">.</span><span class="n">wgt</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">w</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="o">.</span><span class="n">app_width</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+        <span class="n">display</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tabs</span><span class="o">.</span><span class="n">wgt</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Система запущена (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">get_date</span><span class="p">()</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">build_css</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">fpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+        <span class="n">fpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s1">&#39;./style.css&#39;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">css</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">css</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;style&gt;</span><span class="si">{</span><span class="n">css</span><span class="si">}</span><span class="s1">&lt;/style&gt;&#39;</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">css</span><span class="p">))</span>
+
+<div class="viewcode-block" id="Gui.run_ac"><a class="viewcode-back" href="../../code/gui/gui.html#gui.gui.Gui.run_ac">[документация]</a>    <span class="k">def</span> <span class="nf">run_ac</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Запуск метода максимизации активаций.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">dg</span><span class="o">.</span><span class="n">log</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;filters&#39;</span><span class="p">]):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Построение Act. Max. для фильтра </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">run_am</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;layer&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;iters&#39;</span><span class="p">],</span>
+                    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;is_random&#39;</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Act. Max. для фильтра </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s1"> построена&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Отрисовка Act. Max. для фильтра </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+                <span class="n">image_file</span> <span class="o">=</span> <span class="n">random_image_path</span><span class="p">()</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">plot_am</span><span class="p">(</span><span class="n">image_file</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Не удалось нарисовать Act. Max. для фильтра </span><span class="si">{f}</span><span class="s1">&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;err&#39;</span><span class="p">)</span>
+                    <span class="k">return</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ac</span><span class="o">.</span><span class="n">set_image</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">image_file</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Act. Max. для фильтра </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="s1"> нарисована&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Gui.run_at"><a class="viewcode-back" href="../../code/gui/gui.html#gui.gui.Gui.run_at">[документация]</a>    <span class="k">def</span> <span class="nf">run_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Запуск метода атрибуции.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">dg</span><span class="o">.</span><span class="n">log</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Отрисовка исходного изображения&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+            <span class="n">image_file</span> <span class="o">=</span> <span class="n">random_image_path</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">image_file</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Не удалось нарисовать исходное изображение&#39;</span><span class="p">,</span> <span class="s1">&#39;err&#39;</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">at</span><span class="o">.</span><span class="n">set_image_bs</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Иходное изображение нарисовано&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Построение Saliency Map&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">run_sm</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Saliency Map построена&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Отрисовка Saliency Map&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+            <span class="n">image_file</span> <span class="o">=</span> <span class="n">random_image_path</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">plot_sm</span><span class="p">(</span><span class="n">image_file</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Не удалось нарисовать Saliency Map&#39;</span><span class="p">,</span> <span class="s1">&#39;err&#39;</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">at</span><span class="o">.</span><span class="n">set_image_sm</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Saliency Map нарисована&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Построение Integrated Gradients&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">run_ig</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;steps&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Integrated Gradients построен&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Отрисовка Integrated Gradients&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+            <span class="n">image_file</span> <span class="o">=</span> <span class="n">random_image_path</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">plot_sm</span><span class="p">(</span><span class="n">image_file</span><span class="p">):</span> <span class="c1"># TODO Replace to _ig</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Не удалось нарисовать Integrated Gradients&#39;</span><span class="p">,</span> <span class="s1">&#39;err&#39;</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">at</span><span class="o">.</span><span class="n">set_image_ig</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Integrated Gradients нарисован&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Построение TODO-атрибуция&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+            <span class="c1"># self.iv.run_td()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;TODO-атрибуция построена&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Отрисовка TODO-атрибуция&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+            <span class="n">image_file</span> <span class="o">=</span> <span class="n">random_image_path</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">plot_sm</span><span class="p">(</span><span class="n">image_file</span><span class="p">):</span> <span class="c1"># TODO Replace to _?</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Не удалось нарисовать TODO-атрибуция&#39;</span><span class="p">,</span> <span class="s1">&#39;err&#39;</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">at</span><span class="o">.</span><span class="n">set_image_td</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;TODO-атрибуция нарисована&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Gui.run_ar"><a class="viewcode-back" href="../../code/gui/gui.html#gui.gui.Gui.run_ar">[документация]</a>    <span class="k">def</span> <span class="nf">run_ar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Запуск метода построения архитектуры.&quot;&quot;&quot;</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="Gui.run_cs"><a class="viewcode-back" href="../../code/gui/gui.html#gui.gui.Gui.run_cs">[документация]</a>    <span class="k">def</span> <span class="nf">run_cs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Запуск метода вывода в консоль.&quot;&quot;&quot;</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="Gui.run_dg"><a class="viewcode-back" href="../../code/gui/gui.html#gui.gui.Gui.run_dg">[документация]</a>    <span class="k">def</span> <span class="nf">run_dg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Запуск метода вывода в &#39;debug&#39;.&quot;&quot;&quot;</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="Gui.run_md"><a class="viewcode-back" href="../../code/gui/gui.html#gui.gui.Gui.run_md">[документация]</a>    <span class="k">def</span> <span class="nf">run_md</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Запуск метода подготовки модели.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">dg</span><span class="o">.</span><span class="n">log</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Обработка модели и данных&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;imagenet&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Загрузка меток классов&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">download_imagenet_classes</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Метки классов загружены&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Неизвестный набор данных&#39;</span><span class="p">,</span> <span class="s1">&#39;ftl&#39;</span><span class="p">)</span>
+                <span class="k">return</span>
+
+            <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="o">.</span><span class="n">model_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="c1"># self.iv.set_model(name=data[&#39;model&#39;])</span>
+                <span class="c1"># self.cs.log(&#39;Собственные модели пока что не поддерживаются&#39;, &#39;ftl&#39;)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Загрузка модели из файла&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="kn">from</span> <span class="nn">custom_models.custom_model</span> <span class="kn">import</span> <span class="n">custom_model</span>
+                    <span class="kn">import</span> <span class="nn">torch</span>
+                    <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+                        <span class="n">custom_model</span><span class="o">.</span><span class="n">cuda</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">set_model</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">custom_model</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">])</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Неудачная загрузка модели&#39;</span><span class="p">,</span> <span class="s1">&#39;err&#39;</span><span class="p">)</span>
+                    <span class="k">return</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Загрузка модели&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">set_model</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">])</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Модель загружена&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Загрузка изображения&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;image_link&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;image_file&#39;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Заданы и ссылка, и файл изображения&#39;</span><span class="p">,</span> <span class="s1">&#39;wrn&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;image_link&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;image_file&#39;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Изображение не задано&#39;</span><span class="p">,</span> <span class="s1">&#39;err&#39;</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">set_image</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;image_file&#39;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;image_link&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">x_raw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Не удалось загрузить изображение&#39;</span><span class="p">,</span> <span class="s1">&#39;err&#39;</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Изображение загружено&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Построение предсказания модели&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">md</span><span class="o">.</span><span class="n">set_result</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">y_name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Предсказание модели построено&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Отрисовка исходного изображения&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+            <span class="n">image_file</span> <span class="o">=</span> <span class="n">random_image_path</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">image_file</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Не удалось нарисовать исходное изображение&#39;</span><span class="p">,</span> <span class="s1">&#39;err&#39;</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">md</span><span class="o">.</span><span class="n">set_image</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Иходное изображение нарисовано&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">random_image_path</span><span class="p">(</span><span class="n">folder</span><span class="o">=</span><span class="s1">&#39;./tmp/&#39;</span><span class="p">):</span>
+    <span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10000000000</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/favicon.png" alt="Logo"/>
+    
+    <h1 class="logo logo-name">intevis</h1>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+<h3>Навигация</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data.html">Формат данных</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../work.html">Интерфейс программы</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code/index.html">Программный код</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Код модуля</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021.
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

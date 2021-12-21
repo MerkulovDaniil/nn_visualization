@@ -40,8 +40,8 @@
 <span class="kn">from</span> <span class="nn">.element</span> <span class="kn">import</span> <span class="n">Element</span>
 
 
-<div class="viewcode-block" id="Input"><a class="viewcode-back" href="../../../code/elements/input.html#gui.elements.input.Input">[документация]</a><span class="k">class</span> <span class="nc">Input</span><span class="p">(</span><span class="n">Element</span><span class="p">):</span>
-<div class="viewcode-block" id="Input.__init__"><a class="viewcode-back" href="../../../code/elements/input.html#gui.elements.input.Input.__init__">[документация]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;p&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="Input"><a class="viewcode-back" href="../../../code/gui/elements/input.html#gui.elements.input.Input">[документация]</a><span class="k">class</span> <span class="nc">Input</span><span class="p">(</span><span class="n">Element</span><span class="p">):</span>
+<div class="viewcode-block" id="Input.__init__"><a class="viewcode-back" href="../../../code/gui/elements/input.html#gui.elements.input.Input.__init__">[документация]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;p&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Поле ввода str, элемент пользовательского интерфейса.</span>
 
 <span class="sd">        Args:</span>
@@ -59,7 +59,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">build</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Input.build"><a class="viewcode-back" href="../../../code/elements/input.html#gui.elements.input.Input.build">[документация]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Input.build"><a class="viewcode-back" href="../../../code/gui/elements/input.html#gui.elements.input.Input.build">[документация]</a>    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Метод осуществляет непосредственно построение элемента.</span>
 
 <span class="sd">        Returns:</span>
@@ -75,7 +75,7 @@
 
         <span class="k">return</span> <span class="bp">self</span></div>
 
-<div class="viewcode-block" id="Input.layout"><a class="viewcode-back" href="../../../code/elements/input.html#gui.elements.input.Input.layout">[документация]</a>    <span class="k">def</span> <span class="nf">layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Input.layout"><a class="viewcode-back" href="../../../code/gui/elements/input.html#gui.elements.input.Input.layout">[документация]</a>    <span class="k">def</span> <span class="nf">layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Метод возвращает лейаут (разметку) для элемента.</span>
 
 <span class="sd">        Returns:</span>
@@ -90,7 +90,7 @@
             <span class="n">padding</span>                 <span class="o">=</span> <span class="s1">&#39;0px&#39;</span><span class="p">,</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="Input.on_change"><a class="viewcode-back" href="../../../code/elements/input.html#gui.elements.input.Input.on_change">[документация]</a>    <span class="k">def</span> <span class="nf">on_change</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">change</span><span class="p">):</span>
+<div class="viewcode-block" id="Input.on_change"><a class="viewcode-back" href="../../../code/gui/elements/input.html#gui.elements.input.Input.on_change">[документация]</a>    <span class="k">def</span> <span class="nf">on_change</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">change</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Метод вызывается при изменении пользователем содержимого элемента.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">change</span><span class="p">[</span><span class="s1">&#39;new&#39;</span><span class="p">]</span></div></div>
 </pre></div>
@@ -103,7 +103,7 @@
         <div class="sphinxsidebarwrapper">
 <p class="logo">
   <a href="../../../index.html">
-    <img class="logo" src="../../../_static/favicon.ico" alt="Logo"/>
+    <img class="logo" src="../../../_static/favicon.png" alt="Logo"/>
     
     <h1 class="logo logo-name">intevis</h1>
     
@@ -157,7 +157,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020-2021.
+      &copy;2021.
       
     </div>
 

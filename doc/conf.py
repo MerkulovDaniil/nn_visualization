@@ -6,13 +6,13 @@ sys.path.insert(0, os.path.abspath('..'))
 
 
 project = 'intevis'
-copyright = '2020-2021'
+copyright = '2021'
 author = 'Skoltech'
 language = 'ru'
 html_theme = 'alabaster'
 html_favicon = '_static/favicon.ico'
 html_theme_options = {
-    'logo': 'favicon.ico',
+    'logo': 'favicon.png',
     'logo_name': True,
     'show_powered_by': False,
     'show_relbars': False,

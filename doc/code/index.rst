@@ -16,4 +16,5 @@
 .. toctree::
   :maxdepth: 1
 
-  elements/index
+  intevis
+  gui/index

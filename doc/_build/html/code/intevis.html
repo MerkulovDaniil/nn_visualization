@@ -18,6 +18,8 @@
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Алфавитный указатель" href="../genindex.html" />
     <link rel="search" title="Поиск" href="../search.html" />
+    <link rel="next" title="Графический интерфейс" href="gui/index.html" />
+    <link rel="prev" title="Программный код" href="index.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -34,38 +36,184 @@
 
           <div class="body" role="main">
             
-  <section id="module-intevis">
-<span id="intevis"></span><h1>Intevis: менеджер программного продукта<a class="headerlink" href="#module-intevis" title="Ссылка на этот заголовок">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="intevis.img_rand">
-<span class="sig-prename descclassname"><span class="pre">intevis.</span></span><span class="sig-name descname"><span class="pre">img_rand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#img_rand"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.img_rand" title="Ссылка на это определение">¶</a></dt>
-<dd><p>Create random PIL image.</p>
+  <section id="intevis">
+<h1>Intevis: менеджер программного продукта<a class="headerlink" href="#intevis" title="Ссылка на этот заголовок">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="intevis.Intevis">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">intevis.</span></span><span class="sig-name descname"><span class="pre">Intevis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#Intevis"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.Intevis" title="Ссылка на это определение">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="intevis.Intevis.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">42</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#Intevis.__init__"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.Intevis.__init__" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Менеджер программного продукта.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры</dt>
+<dd class="field-odd"><p><strong>seed</strong> (<em>int</em>) – опциональный параметр для генератора случайных чисел.</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="intevis.img_to_tensor">
-<span class="sig-prename descclassname"><span class="pre">intevis.</span></span><span class="sig-name descname"><span class="pre">img_to_tensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">224</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#img_to_tensor"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.img_to_tensor" title="Ссылка на это определение">¶</a></dt>
-<dd><p>Transform PIL image to tensor.</p>
-<p>It returns a tensor of the shape [1, number of channels, height, width].</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="intevis.Intevis.download_imagenet_classes">
+<span class="sig-name descname"><span class="pre">download_imagenet_classes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#Intevis.download_imagenet_classes"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.Intevis.download_imagenet_classes" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Загрузка из сети Интернет описания imagenet классов.</p>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="intevis.tensor_rand">
-<span class="sig-prename descclassname"><span class="pre">intevis.</span></span><span class="sig-name descname"><span class="pre">tensor_rand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#tensor_rand"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.tensor_rand" title="Ссылка на это определение">¶</a></dt>
-<dd><p>Create random PIL image and transform it to tensor.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="intevis.Intevis.gui">
+<span class="sig-name descname"><span class="pre">gui</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1200px'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'600px'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#Intevis.gui"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.Intevis.gui" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Запуск графического пользовательского интерфейса.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>width</strong> (<em>str</em>) – ширина элемента (например, «1200px»).</p></li>
+<li><p><strong>height</strong> (<em>str</em>) – высота элемента (например, «600px»).</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="intevis.tensor_to_img">
-<span class="sig-prename descclassname"><span class="pre">intevis.</span></span><span class="sig-name descname"><span class="pre">tensor_to_img</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">br</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#tensor_to_img"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.tensor_to_img" title="Ссылка на это определение">¶</a></dt>
-<dd><p>Normalise tensor with values between [vmin, vmax].</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="intevis.Intevis.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#Intevis.plot"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.Intevis.plot" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Построение (графика) входного изображения.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры</dt>
+<dd class="field-odd"><p><strong>fpath</strong> (<em>str</em>) – путь к файлу для сохранения изображения. Если не задан,
+то производится непосредственная отрисовка изображения.</p>
+</dd>
+<dt class="field-even">Результат</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>флаг успешности операции (возвращается только при сохранении</dt><dd><p>в файл).</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="intevis.tensor_to_plot">
-<span class="sig-prename descclassname"><span class="pre">intevis.</span></span><span class="sig-name descname"><span class="pre">tensor_to_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#tensor_to_plot"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.tensor_to_plot" title="Ссылка на это определение">¶</a></dt>
-<dd><p>Prepare tensor for image plot.</p>
-<p>It returns a tensor of the shape [number of channels, height, width].</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="intevis.Intevis.plot_am">
+<span class="sig-name descname"><span class="pre">plot_am</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#Intevis.plot_am"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.Intevis.plot_am" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Построение (графика) результата метода AM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры</dt>
+<dd class="field-odd"><p><strong>fpath</strong> (<em>str</em>) – путь к файлу для сохранения изображения. Если не задан,
+то производится непосредственная отрисовка изображения.</p>
+</dd>
+<dt class="field-even">Результат</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>флаг успешности операции (возвращается только при сохранении</dt><dd><p>в файл).</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="intevis.Intevis.plot_ig">
+<span class="sig-name descname"><span class="pre">plot_ig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#Intevis.plot_ig"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.Intevis.plot_ig" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Построение (графика) результата метода IG.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры</dt>
+<dd class="field-odd"><p><strong>fpath</strong> (<em>str</em>) – путь к файлу для сохранения изображения. Если не задан,
+то производится непосредственная отрисовка изображения.</p>
+</dd>
+<dt class="field-even">Результат</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>флаг успешности операции (возвращается только при сохранении</dt><dd><p>в файл).</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="intevis.Intevis.plot_sm">
+<span class="sig-name descname"><span class="pre">plot_sm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#Intevis.plot_sm"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.Intevis.plot_sm" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Построение (графика) результата метода SM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Параметры</dt>
+<dd class="field-odd"><p><strong>fpath</strong> (<em>str</em>) – путь к файлу для сохранения изображения. Если не задан,
+то производится непосредственная отрисовка изображения.</p>
+</dd>
+<dt class="field-even">Результат</dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>флаг успешности операции (возвращается только при сохранении</dt><dd><p>в файл).</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Тип результата</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="intevis.Intevis.run_am">
+<span class="sig-name descname"><span class="pre">run_am</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_random</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">224</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#Intevis.run_am"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.Intevis.run_am" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Запуск метода максимизации активаций.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="intevis.Intevis.run_ar">
+<span class="sig-name descname"><span class="pre">run_ar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#Intevis.run_ar"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.Intevis.run_ar" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Запуск метода визуализации архитектуры.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="intevis.Intevis.run_ig">
+<span class="sig-name descname"><span class="pre">run_ig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#Intevis.run_ig"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.Intevis.run_ig" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Запуск метода атрибуции IG.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="intevis.Intevis.run_sm">
+<span class="sig-name descname"><span class="pre">run_sm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#Intevis.run_sm"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.Intevis.run_sm" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Запуск метода атрибуции SM.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="intevis.Intevis.vis_arc_1">
+<span class="sig-name descname"><span class="pre">vis_arc_1</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#Intevis.vis_arc_1"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.Intevis.vis_arc_1" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Old architecture visualiztion #1.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="intevis.Intevis.vis_arc_2">
+<span class="sig-name descname"><span class="pre">vis_arc_2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#Intevis.vis_arc_2"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.Intevis.vis_arc_2" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Old architecture visualiztion #2.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="intevis.Intevis.vis_arc_3">
+<span class="sig-name descname"><span class="pre">vis_arc_3</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#Intevis.vis_arc_3"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.Intevis.vis_arc_3" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Old architecture visualiztion #3.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="intevis.Intevis.vis_arc_4">
+<span class="sig-name descname"><span class="pre">vis_arc_4</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#Intevis.vis_arc_4"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.Intevis.vis_arc_4" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Old architecture visualiztion #4.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="intevis.Intevis.vis_arc_5">
+<span class="sig-name descname"><span class="pre">vis_arc_5</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/intevis.html#Intevis.vis_arc_5"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#intevis.Intevis.vis_arc_5" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Old architecture visualiztion #5.</p>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -79,7 +227,7 @@
         <div class="sphinxsidebarwrapper">
 <p class="logo">
   <a href="../index.html">
-    <img class="logo" src="../_static/favicon.ico" alt="Logo"/>
+    <img class="logo" src="../_static/favicon.png" alt="Logo"/>
     
     <h1 class="logo logo-name">intevis</h1>
     
@@ -94,17 +242,21 @@
 
 
 <h3>Навигация</h3>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../data.html">Формат данных</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../work.html">Интерфейс программы</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Программный код</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Программный код</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Программный код</a><ul>
+      <li>Previous: <a href="index.html" title="предыдущая глава">Программный код</a></li>
+      <li>Next: <a href="gui/index.html" title="следующая глава">Графический интерфейс</a></li>
+  </ul></li>
   </ul></li>
 </ul>
 </div>
@@ -131,7 +283,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &copy;2020-2021.
+      &copy;2021.
       
       |
       <a href="../_sources/code/intevis.rst.txt"
