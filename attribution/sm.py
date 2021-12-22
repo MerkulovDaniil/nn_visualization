@@ -2,6 +2,16 @@ import torch
 
 
 def sm(model, x):
+    """Метод атрибуции Saliency Map (SM).
+
+        Args:
+            model (torch.nn.Module): нейронная сеть.
+            x (torch.tensor): входной вектор для сети.
+
+        Returns:
+            x (torch.tensor): карта атрибуции для входного вектора.
+
+    """
     x.requires_grad_()
     scores = model(x)
     score_max_index = scores.argmax()

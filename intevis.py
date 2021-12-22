@@ -16,6 +16,7 @@ from gui.gui import Gui
 from opts import opts
 import architecture as arch
 
+
 class Intevis:
     def __init__(self, seed=42):
         """Менеджер программного продукта.

@@ -120,6 +120,18 @@ def visualize(img, res, res_overlay, title, fname=None):
 
 
 def ig(model, img, steps, device):
+    """Метод атрибуции Integrated Gradients (IG).
+
+        Args:
+            model (torch.nn.Module): нейронная сеть.
+            x (torch.tensor): входной вектор для сети.
+            steps (int): количество итераций метода.
+            device (str): используемое устройство ('cpu' или 'gpu').
+
+        Returns:
+            x (torch.tensor): карта атрибуции для входного вектора.
+
+    """
     model.eval()
 
     # import cv2
