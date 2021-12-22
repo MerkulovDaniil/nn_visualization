@@ -108,23 +108,23 @@ class Gui:
 
             self.cs.log('Отрисовка Integrated Gradients', 'prc')
             image_file = random_image_path()
-            if not self.iv.plot_sm(image_file): # TODO Replace to _ig
+            if not self.iv.plot_ig(image_file):
                 self.cs.log('Не удалось нарисовать Integrated Gradients', 'err')
                 return
             self.at.set_image_ig(image_file)
             self.cs.log('Integrated Gradients нарисован', 'res')
 
-            self.cs.log('Построение TODO-атрибуция', 'prc')
-            # self.iv.run_td()
-            self.cs.log('TODO-атрибуция построена', 'res')
+            self.cs.log('Построение Score-CAM', 'prc')
+            self.iv.run_sc()
+            self.cs.log('Score-CAM построена', 'res')
 
-            self.cs.log('Отрисовка TODO-атрибуция', 'prc')
+            self.cs.log('Отрисовка Score-CAM', 'prc')
             image_file = random_image_path()
-            if not self.iv.plot_sm(image_file): # TODO Replace to _?
-                self.cs.log('Не удалось нарисовать TODO-атрибуция', 'err')
+            if not self.iv.plot_sc(image_file):
+                self.cs.log('Не удалось нарисовать Score-CAM', 'err')
                 return
-            self.at.set_image_td(image_file)
-            self.cs.log('TODO-атрибуция нарисована', 'res')
+            self.at.set_image_sc(image_file)
+            self.cs.log('Score-CAM нарисована', 'res')
 
     def run_ar(self, data):
         """Запуск метода построения архитектуры."""
