@@ -231,7 +231,8 @@ class Intevis:
             except:
                 target_layer = list(self.model.children())[-3]
         # TODO: сделать универсальный выбор слоя. Сейчас подразумевается, что первый блок это backbone или features и берется его выход
-        self.sc = sc(self.model, target_layer, self.x, class_idx=None)
+        self.sc = sc(self.model, target_layer, self.x, class_idx=None,
+            device=self.device)
 
     def set_image(self, data=None, link=None):
         if data is not None:

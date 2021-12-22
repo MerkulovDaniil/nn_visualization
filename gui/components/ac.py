@@ -1,4 +1,5 @@
 from ..elements.button import Button
+from ..elements.dropdown import Dropdown
 from ..elements.figure import Figure
 from ..elements.input_bool import InputBool
 from ..elements.input_int import InputInt
@@ -37,7 +38,8 @@ class Ac(Component):
         self.lr = InputFloat(v=0.5, v_min=-4, v_max=1.)
 
         help = 'Если выбрано, то будет использован шум в качестве начального приближения, иначе будет использовано загруженное изображение. По умолчанию не выбрано.'
-        self.image_random = InputBool(False , help)
+        # self.image_random = InputBool(False , help)
+        self.image_random = Dropdown(['Изображение', 'Шум'])
 
         self.btn_run = Button(self.on_run, 'Запустить')
 
@@ -49,7 +51,7 @@ class Ac(Component):
             'Фильтр #4': self.filter4,
             'Итерации': self.iters,
             'Скорость обучения': self.lr,
-            'Случайная инициализация': self.image_random,
+            'Инициализация': self.image_random,
         }, self.btn_run)
 
     def clear(self):
@@ -71,7 +73,7 @@ class Ac(Component):
             'filters': self.filters,
             'iters': self.iters.value,
             'lr': self.lr.value,
-            'is_random': self.image_random.value,
+            'is_random': self.image_random.wgt.value == 'Шум',
         })
 
     def set_image(self, i, fpath):
