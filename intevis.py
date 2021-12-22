@@ -12,6 +12,7 @@ import yaml
 from activation.am import am
 from attribution.ig import ig
 from attribution.sm import sm
+from attribution.sc import sc
 from gui.gui import Gui
 from opts import opts
 import architecture as arch
@@ -48,6 +49,7 @@ class Intevis:
         self.am = None
         self.ig = None
         self.sm = None
+        self.sc = None
 
     def download_imagenet_classes(self):
         """Загрузка из сети Интернет описания imagenet классов."""
@@ -147,6 +149,24 @@ class Intevis:
 
         return plot(x, fpath, with_cmap=True)
 
+    def plot_sc(self, fpath=None):
+        """Построение (графика) результата метода Score-CAM.
+
+        Args:
+            fpath (str): путь к файлу для сохранения изображения. Если не задан,
+                то производится непосредственная отрисовка изображения.
+
+        Returns:
+            bool: флаг успешности операции (возвращается только при сохранении
+                в файл).
+
+        """
+        if self.sc is None:
+            return False
+
+        x = self.sc.cpu().squeeze()
+        return plot(x, fpath, with_cmap=True)
+
     def preprocess(self, image, size=224):
         transform = torchvision.transforms.Compose([
             torchvision.transforms.Resize((size, size)),
@@ -196,6 +216,21 @@ class Intevis:
     def run_sm(self):
         """Запуск метода атрибуции SM."""
         self.sm = sm(self.model, self.x)
+
+    def run_sc(self):
+        """Запуск метода атрибуции Score-CAM"""
+        # ['vgg13', 'vgg16', 'vgg19', 'resnet18', 'own']
+        if self.model_name in ['vgg13', 'vgg16', 'vgg19']:
+            target_layer = list(self.model.children())[0]
+        elif self.model_name in ['resnet18']:
+            target_layer = list(self.model.children())[-3]
+        else:
+            try:
+                target_layer = list(self.model.children())[0][-1]
+            except:
+                target_layer = list(self.model.children())[-3]
+        # TODO: сделать универсальный выбор слоя. Сейчас подразумевается, что первый блок это backbone или features и берется его выход
+        self.sc = sc(self.model, target_layer, self.x, class_idx=None)
 
     def set_image(self, data=None, link=None):
         if data is not None:

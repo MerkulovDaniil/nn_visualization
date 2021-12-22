@@ -15,7 +15,7 @@ class At(Component):
         self.build_content()
         self.build_panel()
 
-        conts = [self.win_bs, self.win_sm, self.win_ig, self.win_td]
+        conts = [self.win_bs, self.win_sm, self.win_ig, self.win_sc]
         self.wgt = Window(self.panel, conts)
         self.wgt.set(h=self.opts.app_height).build()
 
@@ -25,7 +25,7 @@ class At(Component):
         self.win_bs = Output()
         self.win_sm = Output()
         self.win_ig = Output()
-        self.win_td = Output()
+        self.win_sc = Output()
 
     def build_panel(self):
         self.steps = InputInt(v=50, v_min=1, v_max=500)
@@ -40,7 +40,7 @@ class At(Component):
         self.win_bs.clear()
         self.win_sm.clear()
         self.win_ig.clear()
-        self.win_td.clear()
+        self.win_sc.clear()
 
     def on_run(self):
         self.clear()
@@ -61,5 +61,6 @@ class At(Component):
         figure = Figure(fpath, 'Integrated Gradients')
         self.win_ig.add(figure)
 
-    def set_image_td(self, fpath):
-        self.win_td.add_text('TODO - 3 ий метод')
+    def set_image_sc(self, fpath):
+        figure = Figure(fpath, 'Score-CAM')
+        self.win_sc.add(figure)
