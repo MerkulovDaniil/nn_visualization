@@ -231,8 +231,13 @@ class Intevis:
             except:
                 target_layer = list(self.model.children())[-3]
         # TODO: сделать универсальный выбор слоя. Сейчас подразумевается, что первый блок это backbone или features и берется его выход
+
+        if torch.cuda.is_available():
+            device = 'cuda'
+        else:
+            device = 'cpu'
         self.sc = sc(self.model, target_layer, self.x, class_idx=None,
-            device=self.device)
+            device=device)
 
     def set_image(self, data=None, link=None):
         if data is not None:
