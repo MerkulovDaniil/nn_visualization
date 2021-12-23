@@ -10,20 +10,20 @@ class ScoreCAM(object):
         self.device = device
 
         self.model.eval()
-        if self.device.type == 'gpu':
+        if self.device.type == 'cuda':
           self.model.cuda()
         self.gradients = dict()
         self.activations = dict()
 
         def backward_hook(module, grad_input, grad_output):
-            if self.device.type == 'gpu':
+            if self.device.type == 'cuda':
               self.gradients['value'] = grad_output[0].cuda()
             else:
               self.gradients['value'] = grad_output[0]
             return None
 
         def forward_hook(module, input, output):
-            if self.device.type == 'gpu':
+            if self.device.type == 'cuda':
               self.activations['value'] = output.cuda()
             else:
               self.activations['value'] = output
@@ -35,10 +35,9 @@ class ScoreCAM(object):
 
     def forward(self, input, class_idx=None, retain_graph=False):
         b, c, h, w = input.size()
-
         logit = self.model(input)
-        if self.device.type == 'gpu':
-            logit = logit.cuda()
+        if self.device.type == 'cuda':
+            logit.cuda()
 
         if class_idx is None:
             predicted_class = logit.max(1)[-1]
@@ -47,23 +46,15 @@ class ScoreCAM(object):
             predicted_class = torch.LongTensor([class_idx])
             score = logit[:, class_idx].squeeze()
 
-        logit = F.softmax(logit)
-
-        if self.device.type == 'gpu':
-          predicted_class= predicted_class.cuda()
-          score = score.cuda()
-          logit = logit.cuda()
+        logit = F.softmax(logit, dim=1)
 
         self.model.zero_grad()
         score.backward(retain_graph=retain_graph)
+        score_saliency_map = torch.zeros((1, 1, h, w), device=self.device)          
         activations = self.activations['value']
         b, k, u, v = activations.size()
-
-        score_saliency_map = torch.zeros((1, 1, h, w))
-
-        if self.device.type == 'gpu':
-          activations = activations.cuda()
-          score_saliency_map = score_saliency_map.cuda()
+        if self.device.type == 'cuda':
+          activations.cuda()
 
         with torch.no_grad():
           for i in range(k):
@@ -71,7 +62,8 @@ class ScoreCAM(object):
               # upsampling
               saliency_map = torch.unsqueeze(activations[:, i, :, :], 1)
               saliency_map = F.interpolate(saliency_map, size=(h, w), mode='bilinear', align_corners=False)
-
+              if self.device.type == 'cuda':
+                saliency_map.cuda()
               if saliency_map.max() == saliency_map.min():
                 continue
 
@@ -81,9 +73,9 @@ class ScoreCAM(object):
               # how much increase if keeping the highlighted region
               # predication on masked input
               output = self.model(input * norm_saliency_map)
-              output = F.softmax(output)
+              output = F.softmax(output, dim=1)
               score = output[0][predicted_class]
-
+              score_saliency_map.cuda()
               score_saliency_map +=  score * saliency_map
 
         score_saliency_map = F.relu(score_saliency_map)
