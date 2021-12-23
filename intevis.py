@@ -185,6 +185,8 @@ class Intevis:
 
     def run_am(self, layer, filter, lr, iters, is_random, sz=224):
         """Запуск метода максимизации активаций."""
+        self.model.eval()
+
         if is_random:
             x = tensor_rand(sz)
         else:
@@ -210,12 +212,15 @@ class Intevis:
 
     def run_ig(self, steps):
         """Запуск метода атрибуции IG."""
+
         x = np.array(self.x_raw)
 
         self.ig = ig(self.model, x, steps, self.device)
 
     def run_sm(self):
         """Запуск метода атрибуции SM."""
+        self.model.eval()
+
         self.sm = sm(self.model, self.x)
 
     def run_sc(self):
@@ -240,6 +245,7 @@ class Intevis:
             device=device)
 
     def set_image(self, data=None, link=None):
+        """Задание входного изображения."""
         if data is not None:
             self.x_raw = Image.open(BytesIO(data))
             self.x = self.preprocess(self.x_raw)
@@ -250,6 +256,7 @@ class Intevis:
         self.x = self.x.to(self.device)
 
     def set_model(self, model=None, name=None):
+        """Задание модели ИНС."""
         if model is None:
             self.model = torch.hub.load('pytorch/vision', name, pretrained=True)
             self.model.to(self.device)
@@ -258,58 +265,13 @@ class Intevis:
 
         self.model_name = name
 
-    def vis_arc_1(self):
-        """Old architecture visualiztion #1."""
-        text = ''
-        features = self.model.features.named_children()
-        for f in features:
-            text += f'>>> {f}\n'
-        print(text)
-
-    def vis_arc_2(self):
-        """Old architecture visualiztion #2."""
-        import torchinfo
-
-        text = torchinfo.summary(self.model)
-        print(text)
-
-    def vis_arc_3(self):
-        """Old architecture visualiztion #3."""
-        import torchsummary
-
-        ch = 3
-        sz = 224
-        text = torchsummary.summary(self.model, (ch, sz, sz))
-        print(text)
-
-    def vis_arc_4(self):
-        """Old architecture visualiztion #4."""
-        import hiddenlayer
-
-        ch = 3
-        sz = 224
-        g = hiddenlayer.build_graph(self.model, torch.zeros([1, ch, sz, sz]))
-        d = g.build_dot()
-        d.render('_tmp', format='png', view=True)
-        fig = plt.figure(figsize=(22, 20))
-        plt.imshow(Image.open('./_tmp.png'))
-        plt.axis('off')
-        plt.show()
-
-    def vis_arc_5(self):
-        """Old architecture visualiztion #5."""
-        import torchviz
-
-        x = tensor_rand(224)
-        y = self.model(x)
-        return torchviz.make_dot(y.mean(),
-            params=dict(self.model.named_parameters()))
-
 
 def img_to_tensor(img, sz=224):
-    """Transform PIL image to tensor.
+    """Преобразование PIL изображения в тензор.
 
-    It returns a tensor of the shape [1, number of channels, height, width].
+    Note:
+        Возвращает случайный тензор формы [1, number of channels, height,
+        width].
 
     """
     if not isinstance(img, Image.Image):
@@ -328,7 +290,7 @@ def img_to_tensor(img, sz=224):
 
 
 def img_rand(sz):
-    """Create random PIL image."""
+    """Создание случайного PIL изображения."""
     img = np.uint8(np.random.uniform(150, 180, (sz, sz, 3)))
     img = torchvision.transforms.functional.to_pil_image(img)
     return img
@@ -358,12 +320,12 @@ def plot_clear():
 
 
 def tensor_rand(sz):
-    """Create random PIL image and transform it to tensor."""
+    """Создание случайного PIL изображения и трансформация в тензор."""
     return img_to_tensor(img_rand(sz))
 
 
 def tensor_to_img(x, vmin=0., vmax=1., sat=0.1, br=0.5):
-    """Normalise tensor with values between [vmin, vmax]."""
+    """Нормализация тензора со значениями между [vmin, vmax]."""
     x = x.detach().cpu()
     m = x.mean()
     s = x.std() or 1.E-8
@@ -371,9 +333,10 @@ def tensor_to_img(x, vmin=0., vmax=1., sat=0.1, br=0.5):
 
 
 def tensor_to_plot(x):
-    """Prepare tensor for image plot.
+    """Подготовка тензора для отрисовки как изобаражения.
 
-    It returns a tensor of the shape [number of channels, height, width].
+    Note:
+        Возвращает тензор формы [number of channels, height, width].
 
     """
     y = x.clone().squeeze(0) if len(x.shape) == 4 else x.clone()

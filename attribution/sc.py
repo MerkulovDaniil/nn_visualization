@@ -104,5 +104,17 @@ class ScoreCAM(object):
 
 
 def sc(model, target_layer, x, class_idx=None, device='cpu'):
+    """Метод атрибуции Score-CAM).
+
+        Args:
+            model (torch.nn.Module): нейронная сеть.
+            target_layer (str): целевой слой
+            x (torch.tensor): входной вектор для сети.
+            class_idx (str): метка класса.
+
+        Returns:
+            x (torch.tensor): карта атрибуции для входного вектора.
+
+    """
     score_cam = ScoreCAM(model, target_layer, device)
     return score_cam(x, class_idx=class_idx)
