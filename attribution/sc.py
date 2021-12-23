@@ -1,9 +1,6 @@
-import torch.nn.functional as F
 import torch
+import torch.nn.functional as F
 
-'''
-Code of Score-CAM from https://github.com/haofanwang/Score-CAM/tree/master/utils
-'''
 
 class ScoreCAM(object):
 
