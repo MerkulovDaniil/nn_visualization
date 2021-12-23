@@ -7,7 +7,7 @@
 
 ## "Облачный" запуск
 
-Для запуска достаточно выполнить/запустить первую ячейку с кодом в colab ноутбуке [intevis](https://drive.google.com/file/d/1qrfXf1Oze0J2RoaodDYwUlTJ8aEwIzZ_/view?usp=sharing).
+Для запуска достаточно выполнить/запустить первую ячейку с кодом в colab ноутбуке [intevis](https://colab.research.google.com/drive/1HwwHbwYvMYujCgNv6mn3EiP2WGa-TJRr?usp=sharing).
 
 ## "Локальный" запуск
 
