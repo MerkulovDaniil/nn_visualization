@@ -2,7 +2,7 @@
 HiddenLayer
 
 PyTorch graph importer.
- 
+
 Written by Waleed Abdulla
 Licensed under the MIT License
 """
@@ -18,7 +18,7 @@ FRAMEWORK_TRANSFORMS = [
     # Hide onnx: prefix
     ht.Rename(op=r"onnx::(.*)", to=r"\1"),
     # ONNX uses Gemm for linear layers (stands for General Matrix Multiplication).
-    # It's an odd name that noone recognizes. Rename it. 
+    # It's an odd name that noone recognizes. Rename it.
     ht.Rename(op=r"Gemm", to=r"Linear"),
     # PyTorch layers that don't have an ONNX counterpart
     ht.Rename(op=r"aten::max\_pool2d\_with\_indices", to="MaxPool"),
@@ -78,7 +78,7 @@ def import_graph(hl_graph, model, args, input_names=None, verbose=False):
     # Run the Pytorch graph to get a trace and generate a graph from it
     trace, out = torch.jit._get_trace_graph(model, args)
     torch_graph = torch.onnx._optimize_trace(trace, torch.onnx.OperatorExportTypes.ONNX)
-    from torchsummary import summary, torch_model_dict
+    from .torchsummary import summary, torch_model_dict
     torch_summ_dict = torch_model_dict(model, input_size=tuple(args.shape[1:]))
     import copy
     torch_summ_dict_copy = copy.deepcopy(torch_summ_dict)
@@ -100,7 +100,7 @@ def import_graph(hl_graph, model, args, input_names=None, verbose=False):
                     del torch_summ_dict_copy[key]
                     break
         # Parameters
-        params = {k: torch_node[k] for k in torch_node.attributeNames()} 
+        params = {k: torch_node[k] for k in torch_node.attributeNames()}
         # Inputs/outputs
         # TODO: inputs = [i.unique() for i in node.inputs()]
         outputs = [o.unique() for o in torch_node.outputs()]
