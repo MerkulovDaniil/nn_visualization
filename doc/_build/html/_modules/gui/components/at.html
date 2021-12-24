@@ -51,7 +51,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">build_content</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">build_panel</span><span class="p">()</span>
 
-        <span class="n">conts</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">win_bs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">win_sm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">win_ig</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">win_td</span><span class="p">]</span>
+        <span class="n">conts</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">win_bs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">win_sm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">win_ig</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">win_sc</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wgt</span> <span class="o">=</span> <span class="n">Window</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">panel</span><span class="p">,</span> <span class="n">conts</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">wgt</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">h</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">opts</span><span class="o">.</span><span class="n">app_height</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
 
@@ -61,7 +61,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">win_bs</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">win_sm</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">win_ig</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">win_td</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">win_sc</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">build_panel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">steps</span> <span class="o">=</span> <span class="n">InputInt</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">v_min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">v_max</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
@@ -76,7 +76,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">win_bs</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">win_sm</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">win_ig</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">win_td</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">win_sc</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">on_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
@@ -97,8 +97,9 @@
         <span class="n">figure</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s1">&#39;Integrated Gradients&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">win_ig</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">figure</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_image_td</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">win_td</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="s1">&#39;TODO - 3 ий метод&#39;</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="nf">set_image_sc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="p">):</span>
+        <span class="n">figure</span> <span class="o">=</span> <span class="n">Figure</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s1">&#39;Score-CAM&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">win_sc</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">figure</span><span class="p">)</span></div>
 </pre></div>
 
           </div>
@@ -125,8 +126,6 @@
 
 <h3>Навигация</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../data.html">Формат данных</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../work.html">Интерфейс программы</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../code/index.html">Программный код</a></li>
 </ul>
@@ -144,7 +143,7 @@
   <h3 id="searchlabel">Быстрый поиск</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Искать" />
     </form>
     </div>

@@ -55,7 +55,6 @@
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
- | <a href="#V"><strong>V</strong></a>
  | <a href="#W"><strong>W</strong></a>
  | <a href="#М"><strong>М</strong></a>
  
@@ -539,11 +538,13 @@
 </li>
       <li><a href="code/intevis.html#intevis.Intevis.plot">plot() (метод intevis.Intevis)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="code/intevis.html#intevis.Intevis.plot_am">plot_am() (метод intevis.Intevis)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="code/intevis.html#intevis.Intevis.plot_ig">plot_ig() (метод intevis.Intevis)</a>
+</li>
+      <li><a href="code/intevis.html#intevis.Intevis.plot_sc">plot_sc() (метод intevis.Intevis)</a>
 </li>
       <li><a href="code/intevis.html#intevis.Intevis.plot_sm">plot_sm() (метод intevis.Intevis)</a>
 </li>
@@ -574,6 +575,8 @@
       <li><a href="code/intevis.html#intevis.Intevis.run_ig">run_ig() (метод intevis.Intevis)</a>
 </li>
       <li><a href="code/gui/gui.html#gui.gui.Gui.run_md">run_md() (метод gui.gui.Gui)</a>
+</li>
+      <li><a href="code/intevis.html#intevis.Intevis.run_sc">run_sc() (метод intevis.Intevis)</a>
 </li>
       <li><a href="code/intevis.html#intevis.Intevis.run_sm">run_sm() (метод intevis.Intevis)</a>
 </li>
@@ -620,6 +623,12 @@
 </li>
       </ul></li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="code/intevis.html#intevis.Intevis.set_image">set_image() (метод intevis.Intevis)</a>
+</li>
+      <li><a href="code/intevis.html#intevis.Intevis.set_model">set_model() (метод intevis.Intevis)</a>
+</li>
+  </ul></td>
 </tr></table>
 
 <h2 id="T">T</h2>
@@ -640,24 +649,6 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="code/gui/elements/upload.html#gui.elements.upload.Upload">Upload (класс в gui.elements.upload)</a>
-</li>
-  </ul></td>
-</tr></table>
-
-<h2 id="V">V</h2>
-<table style="width: 100%" class="indextable genindextable"><tr>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="code/intevis.html#intevis.Intevis.vis_arc_1">vis_arc_1() (метод intevis.Intevis)</a>
-</li>
-      <li><a href="code/intevis.html#intevis.Intevis.vis_arc_2">vis_arc_2() (метод intevis.Intevis)</a>
-</li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="code/intevis.html#intevis.Intevis.vis_arc_3">vis_arc_3() (метод intevis.Intevis)</a>
-</li>
-      <li><a href="code/intevis.html#intevis.Intevis.vis_arc_4">vis_arc_4() (метод intevis.Intevis)</a>
-</li>
-      <li><a href="code/intevis.html#intevis.Intevis.vis_arc_5">vis_arc_5() (метод intevis.Intevis)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -755,8 +746,6 @@
 
 <h3>Навигация</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data.html">Формат данных</a></li>
 <li class="toctree-l1"><a class="reference internal" href="work.html">Интерфейс программы</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code/index.html">Программный код</a></li>
 </ul>
@@ -772,7 +761,7 @@
   <h3 id="searchlabel">Быстрый поиск</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Искать" />
     </form>
     </div>

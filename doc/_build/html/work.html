@@ -4,7 +4,7 @@
 <html lang="ru">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Интерфейс программы &#8212; документация intevis </title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
@@ -19,7 +19,7 @@
     <link rel="index" title="Алфавитный указатель" href="genindex.html" />
     <link rel="search" title="Поиск" href="search.html" />
     <link rel="next" title="Программный код" href="code/index.html" />
-    <link rel="prev" title="Формат данных" href="data.html" />
+    <link rel="prev" title="Документация" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -39,8 +39,70 @@
   <section id="id1">
 <h1>Интерфейс программы<a class="headerlink" href="#id1" title="Ссылка на этот заголовок">¶</a></h1>
 <section id="id2">
-<h2>Порядок проведения расчета<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
-<p>Взаимодействие клиента и сервера осуществляется …</p>
+<h2>«Облачный» запуск<a class="headerlink" href="#id2" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Для запуска достаточно выполнить/запустить первую ячейку с кодом в colab ноутбуке <a class="reference external" href="https://colab.research.google.com/drive/1HwwHbwYvMYujCgNv6mn3EiP2WGa-TJRr?usp=sharing">https://colab.research.google.com/drive/1HwwHbwYvMYujCgNv6mn3EiP2WGa-TJRr?usp=sharing</a>, при этом загрузка кода платформы из репозитория, инициализация и запуск приложения происходят в автоматическом режиме.</p>
+</section>
+<section id="id3">
+<h2>«Локальный» запуск<a class="headerlink" href="#id3" title="Ссылка на этот заголовок">¶</a></h2>
+<p>На конкретное устройство загружается программный код платформы (например, из репозитория на github), устанавливается anaconda, представляющая дистрибутив python с набором библиотек, затем в рамках консольного интерфейса (терминала) последовательно выполняются следующие команды из корня проекта:</p>
+<ol class="arabic">
+<li><p>Создать виртуальное окружение:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda create --name intevis <span class="nv">python</span><span class="o">=</span><span class="m">3</span>.7
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Перейти в виртуальное окружение <cite>intevis</cite>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda activate intevis
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Установить все необходимые зависимости:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install -r requirements.txt
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Запустить jupyter-ноутбук:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter lab
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>В интерфейсе jupyter ноутбука открыть файл <cite>intevis.ipynb</cite> и выполнить/запустить первую ячейку с кодом.</p></li>
+<li><p>По окончании работы при необходимости можно удалить окружение:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda activate <span class="o">&amp;&amp;</span> conda remove --name intevis --all
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="id4">
+<h2>Структура файлов и папок<a class="headerlink" href="#id4" title="Ссылка на этот заголовок">¶</a></h2>
+<p>Для разработки платформы intevis (INTEllectual VISualization) использовался язык программирования python, фреймворк ML pytorch и интерактивный браузерный интерфейс jupyter (либо его реализация в форме облачного интерфейса colab от Google).
+Соответственно программный код был организован в форме python-пакета, имеющего следующую структуру файлов и папок:</p>
+<ul class="simple">
+<li><p><cite>intevis.py</cite> - основной скрипт ПО, содержащий класс <cite>Intevis</cite>, представляющий менеджер ПО. Для запуска графического пользовательского интерфейса следует использовать метод класса <cite>gui</cite>;</p></li>
+<li><p><cite>activation</cite> - папка содержит программный код, связанный с активаций отдельных нейронов и слоев ИНС;</p></li>
+<li><p><cite>architecture</cite> - папка содержит программный код, связанный c визуализацией архитектуры ИНС;</p></li>
+<li><p><cite>attribution</cite> - папка содержит программный код, связанный с построением атрибуции ИНС;</p></li>
+<li><p><cite>doc</cite> - папка содержит программный код автоматически генерируемой документации:</p></li>
+<li><p><cite>gui</cite> - папка содержит программный код, связанный с графическим пользовательским интерфейсом.</p></li>
+</ul>
+<p>В папке <cite>gui</cite> содержится:</p>
+<ul class="simple">
+<li><p><cite>gui.py</cite> - основной скрипт, содержащий класс <cite>Gui</cite>, представляющий менеджер графического пользовательского интерфейса. В качестве основы используется популярный python пакет <cite>ipywidgets</cite>;</p></li>
+<li><p><cite>style.css</cite> - файл содержит css-стили пользовательского интерфейса приложения;</p></li>
+<li><p><cite>components</cite> - папка содержит основные компоненты (вкладки) пользовательского интерфейса. Подробные комментарии по использованию элементов приведены в базовом классе <cite>Component</cite> в файле <cite>component.py</cite>;</p></li>
+<li><p><cite>elements</cite> - папка содержит элементы пользовательского интерфейса (кнопки, выпадающие меню и т.п.). Подробные комментарии по использованию элементов приведены в базовом классе <cite>Element</cite> в файле <cite>element.py</cite>.</p></li>
+</ul>
 </section>
 </section>
 
@@ -69,8 +131,6 @@
 
 <h3>Навигация</h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="data.html">Формат данных</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Интерфейс программы</a></li>
 <li class="toctree-l1"><a class="reference internal" href="code/index.html">Программный код</a></li>
 </ul>
@@ -79,7 +139,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="data.html" title="предыдущая глава">Формат данных</a></li>
+      <li>Previous: <a href="index.html" title="предыдущая глава">Документация</a></li>
       <li>Next: <a href="code/index.html" title="следующая глава">Программный код</a></li>
   </ul></li>
 </ul>
@@ -88,7 +148,7 @@
   <h3 id="searchlabel">Быстрый поиск</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Искать" />
     </form>
     </div>

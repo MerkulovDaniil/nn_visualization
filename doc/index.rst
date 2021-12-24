@@ -7,8 +7,6 @@
 .. toctree::
   :maxdepth: 1
 
-  api
-  data
   work
   code/index
 

@@ -144,27 +144,34 @@
 
             <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Отрисовка Integrated Gradients&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
             <span class="n">image_file</span> <span class="o">=</span> <span class="n">random_image_path</span><span class="p">()</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">plot_sm</span><span class="p">(</span><span class="n">image_file</span><span class="p">):</span> <span class="c1"># TODO Replace to _ig</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">plot_ig</span><span class="p">(</span><span class="n">image_file</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Не удалось нарисовать Integrated Gradients&#39;</span><span class="p">,</span> <span class="s1">&#39;err&#39;</span><span class="p">)</span>
                 <span class="k">return</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">at</span><span class="o">.</span><span class="n">set_image_ig</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Integrated Gradients нарисован&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Построение TODO-атрибуция&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
-            <span class="c1"># self.iv.run_td()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;TODO-атрибуция построена&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Построение Score-CAM&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">run_sc</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Score-CAM построена&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Отрисовка TODO-атрибуция&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Отрисовка Score-CAM&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
             <span class="n">image_file</span> <span class="o">=</span> <span class="n">random_image_path</span><span class="p">()</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">plot_sm</span><span class="p">(</span><span class="n">image_file</span><span class="p">):</span> <span class="c1"># TODO Replace to _?</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Не удалось нарисовать TODO-атрибуция&#39;</span><span class="p">,</span> <span class="s1">&#39;err&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">plot_sc</span><span class="p">(</span><span class="n">image_file</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Не удалось нарисовать Score-CAM&#39;</span><span class="p">,</span> <span class="s1">&#39;err&#39;</span><span class="p">)</span>
                 <span class="k">return</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">at</span><span class="o">.</span><span class="n">set_image_td</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;TODO-атрибуция нарисована&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">at</span><span class="o">.</span><span class="n">set_image_sc</span><span class="p">(</span><span class="n">image_file</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Score-CAM нарисована&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Gui.run_ar"><a class="viewcode-back" href="../../code/gui/gui.html#gui.gui.Gui.run_ar">[документация]</a>    <span class="k">def</span> <span class="nf">run_ar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Запуск метода построения архитектуры.&quot;&quot;&quot;</span>
-        <span class="k">return</span></div>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">dg</span><span class="o">.</span><span class="n">log</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Построение вычислительного графа&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">iv</span><span class="o">.</span><span class="n">run_ar</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;dir&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Построение вычислительного графа завершено&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Построение архитектуры&#39;</span><span class="p">,</span> <span class="s1">&#39;prc&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ar</span><span class="o">.</span><span class="n">set_image</span><span class="p">(</span><span class="s2">&quot;./tmp/architecture.png&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cs</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">&#39;Построение архитектуры завершено&#39;</span><span class="p">,</span> <span class="s1">&#39;res&#39;</span><span class="p">)</span>
+            <span class="k">return</span></div>
 
 <div class="viewcode-block" id="Gui.run_cs"><a class="viewcode-back" href="../../code/gui/gui.html#gui.gui.Gui.run_cs">[документация]</a>    <span class="k">def</span> <span class="nf">run_cs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Запуск метода вывода в консоль.&quot;&quot;&quot;</span>
@@ -260,8 +267,6 @@
 
 <h3>Навигация</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../data.html">Формат данных</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../work.html">Интерфейс программы</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../code/index.html">Программный код</a></li>
 </ul>
@@ -279,7 +284,7 @@
   <h3 id="searchlabel">Быстрый поиск</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Искать" />
     </form>
     </div>

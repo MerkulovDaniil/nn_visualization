@@ -35,6 +35,9 @@
             
   <h1>Исходный код gui.components.ar</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">..elements.button</span> <span class="kn">import</span> <span class="n">Button</span>
+<span class="kn">from</span> <span class="nn">..elements.dropdown</span> <span class="kn">import</span> <span class="n">Dropdown</span>
+<span class="kn">from</span> <span class="nn">..elements.image</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">..elements.input_int</span> <span class="kn">import</span> <span class="n">InputInt</span>
 <span class="kn">from</span> <span class="nn">..elements.output</span> <span class="kn">import</span> <span class="n">Output</span>
 <span class="kn">from</span> <span class="nn">..elements.panel</span> <span class="kn">import</span> <span class="n">Panel</span>
 <span class="kn">from</span> <span class="nn">..elements.window</span> <span class="kn">import</span> <span class="n">Window</span>
@@ -56,12 +59,15 @@
 
     <span class="k">def</span> <span class="nf">build_content</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cont</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cont</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="s1">&#39;TODO&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">build_panel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">btn_run</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_run</span><span class="p">,</span> <span class="s1">&#39;Запустить&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dir</span> <span class="o">=</span> <span class="n">Dropdown</span><span class="p">([</span><span class="s1">&#39;Вертикально&#39;</span><span class="p">,</span> <span class="s1">&#39;Горизонтально&#39;</span><span class="p">])</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">panel</span> <span class="o">=</span> <span class="n">Panel</span><span class="p">({},</span> <span class="bp">self</span><span class="o">.</span><span class="n">btn_run</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">btn_run</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_run</span><span class="p">,</span> <span class="s1">&#39;Построить&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">panel</span> <span class="o">=</span> <span class="n">Panel</span><span class="p">({</span>
+            <span class="s1">&#39;Расположение&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="p">,</span>
+        <span class="p">},</span> <span class="bp">self</span><span class="o">.</span><span class="n">btn_run</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cont</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
@@ -69,9 +75,15 @@
     <span class="k">def</span> <span class="nf">on_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 
-        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;dir&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">dir</span><span class="o">.</span><span class="n">wgt</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="p">}</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fpath</span><span class="o">=</span><span class="s1">&#39;./tmp/architecture.png&#39;</span><span class="p">):</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">w</span><span class="o">=</span><span class="s1">&#39;100%&#39;</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="s1">&#39;100%&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cont</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">image</span><span class="p">)</span></div>
 </pre></div>
 
           </div>
@@ -98,8 +110,6 @@
 
 <h3>Навигация</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../data.html">Формат данных</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../work.html">Интерфейс программы</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../code/index.html">Программный код</a></li>
 </ul>
@@ -117,7 +127,7 @@
   <h3 id="searchlabel">Быстрый поиск</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Искать" />
     </form>
     </div>

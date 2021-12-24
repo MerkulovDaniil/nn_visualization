@@ -24,8 +24,7 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.todo',
     'sphinx.ext.inheritance_diagram',
-    'sphinx.ext.viewcode',
-    'm2r2'
+    'sphinx.ext.viewcode'
 ]
 templates_path = [
     '_templates',
