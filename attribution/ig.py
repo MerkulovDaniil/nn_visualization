@@ -100,8 +100,6 @@ def ig(model, img, steps, device):
             x (torch.tensor): карта атрибуции для входного вектора.
 
     """
-    model.eval()
-
     G, k = run([img], model, device)
     A = run_ig(img, model, device, k, steps)
     res = build(A, img)

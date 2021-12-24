@@ -9,9 +9,6 @@ class ScoreCAM(object):
         self.target_layer = target_layer
         self.device = device
 
-        self.model.eval()
-        if self.device.type == 'cuda':
-          self.model.cuda()
         self.gradients = dict()
         self.activations = dict()
 
@@ -50,7 +47,7 @@ class ScoreCAM(object):
 
         self.model.zero_grad()
         score.backward(retain_graph=retain_graph)
-        score_saliency_map = torch.zeros((1, 1, h, w), device=self.device)          
+        score_saliency_map = torch.zeros((1, 1, h, w), device=self.device)
         activations = self.activations['value']
         b, k, u, v = activations.size()
         if self.device.type == 'cuda':

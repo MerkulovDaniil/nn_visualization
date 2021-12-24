@@ -10,12 +10,12 @@ import yaml
 
 
 from activation.am import am
+from architecture.canvas import arch
 from attribution.ig import ig
 from attribution.sm import sm
 from attribution.sc import sc
 from gui.gui import Gui
 from opts import opts
-import architecture as arch
 
 
 class Intevis:
@@ -47,6 +47,7 @@ class Intevis:
         self.y = None
         self.y_name = ''
 
+        # Результаты работы средств анализа ИНС:
         self.am = None
         self.ig = None
         self.sm = None
@@ -198,20 +199,13 @@ class Intevis:
         """Запуск метода визуализации архитектуры."""
         self.model.eval()
 
-        graph = arch.build_graph(
-            self.model, (torch.zeros([1, 3, 228, 228]).to(self.device)))
-        dot = graph.build_dot()
-
-        if dir == 'Горизонтально':
-            dot.attr('graph', rankdir='LR')
-        else:
-            dot.attr('graph', rankdir='TD')
-
-        dot.format = 'png'
-        dot.render('./tmp/architecture')
+        x0 = torch.zeros([1, 3, 228, 228]).to(self.device)
+        is_hor = dir == 'Горизонтально'
+        arch(self.model, x0, './tmp/architecture', 'png', is_hor)
 
     def run_ig(self, steps):
         """Запуск метода атрибуции IG."""
+        self.model.eval()
 
         x = np.array(self.x_raw)
 
@@ -225,6 +219,9 @@ class Intevis:
 
     def run_sc(self):
         """Запуск метода атрибуции Score-CAM"""
+        self.model.eval()
+
+        # TODO: сделать универсальный выбор слоя. Сейчас подразумевается, что первый блок это backbone или features и берется его выход
         # ['vgg13', 'vgg16', 'vgg19', 'resnet18', 'own']
         if self.model_name in ['vgg13', 'vgg16', 'vgg19']:
             target_layer = list(self.model.children())[0]
@@ -235,30 +232,40 @@ class Intevis:
                 target_layer = list(self.model.children())[0][-1]
             except:
                 target_layer = list(self.model.children())[-3]
-        # TODO: сделать универсальный выбор слоя. Сейчас подразумевается, что первый блок это backbone или features и берется его выход
 
         self.sc = sc(self.model, target_layer, self.x, None, self.device)
 
     def set_image(self, data=None, link=None):
-        """Задание входного изображения."""
+        """Задание входного изображения.
+
+        Args:
+            data (byte): непосредственно изображение в raw формате.
+            link (str): url-адрес изображения.
+
+        Note:
+            Должен быть задан только из аргументов data, link. Если заданы оба
+            аргумента, то будет использован data.
+
+        """
         if data is not None:
             self.x_raw = Image.open(BytesIO(data))
-            self.x = self.preprocess(self.x_raw)
         elif link is not None:
             response = requests.get(link)
             self.x_raw = Image.open(BytesIO(response.content))
-            self.x = self.preprocess(self.x_raw)
+
+        self.x = self.preprocess(self.x_raw)
+
         self.x = self.x.to(self.device)
 
     def set_model(self, model=None, name=None):
         """Задание модели ИНС."""
         if model is None:
             self.model = torch.hub.load('pytorch/vision', name, pretrained=True)
-            self.model.to(self.device)
         else:
             self.model = model
 
         self.model_name = name
+        self.model.to(self.device)
 
 
 def img_to_tensor(img, sz=224):
