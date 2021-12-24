@@ -34,7 +34,7 @@ class Ac(Component):
         self.filter2 = InputInt(v=20, v_min=0, v_max=1000)
         self.filter3 = InputInt(v=30, v_min=0, v_max=1000)
         self.filter4 = InputInt(v=40, v_min=0, v_max=1000)
-        self.iters = InputInt(v=20, v_min=1, v_max=100)
+        self.iters = InputInt(v=5, v_min=1, v_max=100)
         self.lr = InputFloat(v=0.5, v_min=-4, v_max=1.)
 
         help = 'Если выбрано, то будет использован шум в качестве начального приближения, иначе будет использовано загруженное изображение. По умолчанию не выбрано.'

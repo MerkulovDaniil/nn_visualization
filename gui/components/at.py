@@ -28,7 +28,7 @@ class At(Component):
         self.win_sc = Output()
 
     def build_panel(self):
-        self.steps = InputInt(v=50, v_min=1, v_max=500)
+        self.steps = InputInt(v=3, v_min=1, v_max=500)
 
         self.btn_run = Button(self.on_run, 'Запустить')
 
