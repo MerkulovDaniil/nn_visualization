@@ -203,9 +203,9 @@ class Intevis:
         dot = graph.build_dot()
 
         if dir == 'Горизонтально':
-            dot.attr("graph", rankdir="LR")
+            dot.attr('graph', rankdir='LR')
         else:
-            dot.attr("graph", rankdir="TD")
+            dot.attr('graph', rankdir='TD')
 
         dot.format = 'png'
         dot.render('./tmp/architecture')
